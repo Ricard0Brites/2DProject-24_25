@@ -11,8 +11,8 @@ public enum InputRoute
 public class Player : MonoBehaviour
 {
     // References
-    private GameObject PlayerObject = null;
-    private Rigidbody2D RB = null;
+    private GameObject _PlayerObject = null;
+    private Rigidbody2D _RB = null;
 
     #region Input
     
@@ -77,11 +77,11 @@ public class Player : MonoBehaviour
             private bool CanJump = true;
             private void Jump()
             {
-                CanJump = Mathf.Abs(RB.velocity.y) < 0.0001f;
+                CanJump = Mathf.Abs(_RB.velocity.y) < 0.0001f;
                 if (!CanJump)
                     return;
-                if (RB)
-                    RB.AddForce(new Vector2(0.0f, JumpForce));
+                if (_RB)
+                    _RB.AddForce(new Vector2(0.0f, JumpForce));
             }
             #endregion
 
@@ -111,8 +111,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //SaveSystem.SaveProgress(this);
-        PlayerObject = GetComponent<GameObject>();
-        RB = GetComponent<Rigidbody2D>();
+        _PlayerObject = GetComponent<GameObject>();
+        _RB = GetComponent<Rigidbody2D>();
 
     }
     private void Update()
