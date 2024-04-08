@@ -5,10 +5,10 @@ using UnityEngine;
 public class LateralMovement : MonoBehaviour
 {
 	#region Parameters
-		[SerializeField]
-		private float _MovementSpeed = 5.0f;
-		[SerializeField]
-		private string _WallTag = "Barrier";
+	[SerializeField]
+	private float _MovementSpeed = 5.0f;
+	[SerializeField]
+	private string _WallTag = "Barrier";
 	#endregion
 
 	#region States
@@ -33,21 +33,11 @@ public class LateralMovement : MonoBehaviour
 	{
 		transform.eulerAngles = new Vector3(transform.eulerAngles.x, _MovementDirection == EMovementDirection.Right ? 0 : 180, transform.eulerAngles.z);
 	}
-
-	void Start()
-    {
-        
-    }
-    void Update()
-    {
-        
-    }
 	void FixedUpdate()
 	{
 		Move();
 		UpdateDirection();
 	}
-
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if(collision.gameObject.CompareTag(_WallTag))

@@ -83,11 +83,11 @@ public class Player : MonoBehaviour
         #region Input Actions
 
             #region Jump
-            private bool CanJump = true;
+            private bool _CanJump = true;
             private void Jump()
             {
-                CanJump = Mathf.Abs(_RB.velocity.y) < 0.0001f;
-                if (!CanJump)
+                _CanJump = Mathf.Abs(_RB.velocity.y) < 0.0001f;
+                if (!_CanJump)
                     return;
                 if (_RB)
                     _RB.AddForce(new Vector2(0.0f, JumpForce));
