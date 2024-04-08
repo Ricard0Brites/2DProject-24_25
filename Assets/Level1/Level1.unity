@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 651023507}
   - component: {fileID: 651023506}
   - component: {fileID: 651023508}
+  - component: {fileID: 651023509}
   m_Layer: 0
   m_Name: DevEnemy_T1
   m_TagString: Untagged
@@ -561,7 +562,7 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -598,6 +599,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MovementSpeed: 5
   _WallTag: Barrier
+--- !u!114 &651023509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651023503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e6d0ece915a4849b9f5036a9574663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PlayerKillAngle: 60
 --- !u!1 &672228909
 GameObject:
   m_ObjectHideFlags: 0
