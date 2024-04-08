@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
             {
                 _IsMoving = true;
                 _MovementDirection = Input.GetAxis("Horizontal") > 0 ? EMovementDirection.Right : EMovementDirection.Left;
-                Debug.Log(_MovementDirection.ToString());
             }
             if (Input.GetButtonDown("Vertical"))
             {
