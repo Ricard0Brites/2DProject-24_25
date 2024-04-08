@@ -1,11 +1,19 @@
+using System.Runtime.CompilerServices;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 
 using Input = UnityEngine.Input; // explicitly defined due to UnityEngine.Windows.Input causing potential issues
 
-public enum InputRoute
+public enum EInputRoute
 {
     Game = 0, // default
     UI
+}
+public enum EMovementDirection
+{
+    Undefined = 0,
+    Right,
+    Left
 }
 
 public class Player : MonoBehaviour
@@ -30,9 +38,9 @@ public class Player : MonoBehaviour
             --                         INPUT ROUTING                           --
             ---------------------------------------------------------------------
         */
-        private InputRoute InputMode = InputRoute.Game;
-        public InputRoute GetInputMode() { return InputMode; }
-        private void SetInputMode(InputRoute NewMode) { InputMode = NewMode; } 
+        private EInputRoute InputMode = EInputRoute.Game;
+        public EInputRoute GetInputMode() { return InputMode; }
+        private void SetInputMode(EInputRoute NewMode) { InputMode = NewMode; } 
         #endregion
 
         #region Input Management
@@ -40,10 +48,10 @@ public class Player : MonoBehaviour
         {
             switch (GetInputMode())
             {
-                case InputRoute.Game:
+                case EInputRoute.Game:
                     GameInput();
                     break;
-                case InputRoute.UI:
+                case EInputRoute.UI:
                     UIInput();
                     break;
                 default:
@@ -52,10 +60,12 @@ public class Player : MonoBehaviour
         }
         private void GameInput()
         {
+            _IsMoving = false;
             if (Input.GetButton("Horizontal"))
             {
-                bool IsMovingRight = Input.GetAxis("Horizontal") > 0;
-                Debug.Log(IsMovingRight);
+                _IsMoving = true;
+                _MovementDirection = Input.GetAxis("Horizontal") > 0 ? EMovementDirection.Right : EMovementDirection.Left;
+                Debug.Log(_MovementDirection.ToString());
             }
             if (Input.GetButtonDown("Vertical"))
             {
@@ -66,9 +76,9 @@ public class Player : MonoBehaviour
             }
         }
         private void UIInput()
-            {
+        {
 
-            }
+        }
         #endregion
 
         #region Input Actions
@@ -83,9 +93,46 @@ public class Player : MonoBehaviour
                 if (_RB)
                     _RB.AddForce(new Vector2(0.0f, JumpForce));
             }
+    #endregion
+
+            #region Horizontal Movement 
+            private bool _IsMoving = false;
+            private EMovementDirection _MovementDirection; //Garanteed initialization to EMovementDirection.Undefined
+            private void UpdatePlayerLocation()
+            {
+                if (!_PlayerObject)
+                    return;
+                if (_IsMoving)
+                {
+                    switch (_MovementDirection)
+                    {
+                        case EMovementDirection.Right:
+                            _PlayerObject.transform.localPosition += new Vector3(MovementSpeed * Time.deltaTime,0,0);
+                            break;
+                        case EMovementDirection.Left:
+                            _PlayerObject.transform.localPosition += new Vector3((MovementSpeed * Time.deltaTime) * -1.0f, 0, 0);
+                            break;
+                    }
+                }
+            }   
+            private void UpdatePlayerDirection()
+            {
+                if(!_PlayerObject)
+                    return;
+                Quaternion CurrentRot = _PlayerObject.transform.rotation;
+                switch (_MovementDirection)
+                {
+                    case EMovementDirection.Right:
+                        _PlayerObject.transform.rotation = new Quaternion(CurrentRot.x, 0, CurrentRot.z, CurrentRot.w);
+                        break;
+                    case EMovementDirection.Left:
+                        _PlayerObject.transform.rotation = new Quaternion(CurrentRot.x, 180, CurrentRot.z, CurrentRot.w);
+                        break;
+                }
+            }
             #endregion
 
-        #endregion
+    #endregion
 
     #endregion
 
@@ -110,8 +157,8 @@ public class Player : MonoBehaviour
     #region Unity Interface
     private void Start()
     {
-        //SaveSystem.SaveProgress(this);
-        _PlayerObject = GetComponent<GameObject>();
+		//SaveSystem.SaveProgress(this);
+        _PlayerObject = gameObject;
         _RB = GetComponent<Rigidbody2D>();
 
     }
@@ -121,6 +168,8 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        UpdatePlayerLocation();
+		UpdatePlayerDirection();
     }
     #endregion
 }
