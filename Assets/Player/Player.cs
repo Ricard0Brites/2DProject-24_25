@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
@@ -148,9 +149,9 @@ public class Player : MonoBehaviour
      --                 Current Items Is a BitMask                 --
      ----------------------------------------------------------------
     */
-
     private int _CurrentItems = 0; 
     public int GetCurrentItems() { return _CurrentItems; }
+    public void TryAddItem(int Item) { _CurrentItems |= Item; }
     #endregion
 
     #region Unity Interface
