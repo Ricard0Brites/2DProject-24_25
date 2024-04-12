@@ -6,7 +6,6 @@ public class PlayerCollisionModule : MonoBehaviour
 	private float _PlayerKillAngle = 45.0f;
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		Debug.Log(Vector3.Angle(Vector3.up, (collision.collider.transform.position) - transform.position));
 		if(collision.collider.CompareTag("Player"))
 		{
 			if(Vector3.Angle(Vector3.up, (collision.collider.transform.position) - transform.position) > _PlayerKillAngle / 2)
