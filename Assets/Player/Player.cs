@@ -1,15 +1,6 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-using Input = UnityEngine.Input; // explicitly defined due to UnityEngine.Windows.Input causing potential issues
-
-public enum EInputRoute
-{
-    Game = 0, // default
-    UI
-}
 public enum EMovementDirection
 {
     Undefined = 0,
@@ -19,126 +10,76 @@ public enum EMovementDirection
 
 public class Player : MonoBehaviour
 {
-    // References
-    private GameObject _PlayerObject = null;
+	[SerializeField] private float MovementSpeed = 1.0f;
+	[SerializeField] private float JumpForce = 1.0f;
+	[SerializeField] private int _Health = 5;
+
+	private GameObject _PlayerObject = null;
     private Rigidbody2D _RB = null;
+    private PlayerInputAction _PlayerControls;
+	private InputAction _Move, _Interact, _Jump;
+	private Vector2 _MoveDirection, _LastDirection;
+	private bool _CanJump = true;
+	private int _CurrentItems = 0;
 
-    #region Input
-    
-        #region Parameters
-        [SerializeField] private float MovementSpeed = 1.0f;
-        [SerializeField] private float JumpForce = 1.0f;
-        #endregion
+	#region Input
 
-        #region Input Routing
-        /*
-            ---------------------------------------------------------------------
-            -- Input modes are used to have ui in game that takes over the     --
-            -- input. This approach allows for easy management.                --
-            --                                                                 --
-            --                         INPUT ROUTING                           --
-            ---------------------------------------------------------------------
-        */
-        private EInputRoute InputMode = EInputRoute.Game;
-        public EInputRoute GetInputMode() { return InputMode; }
-        private void SetInputMode(EInputRoute NewMode) { InputMode = NewMode; } 
-        #endregion
+	    #region Input Management
+	    private void ProcessInput()
+            {
+		        _MoveDirection = _Move.ReadValue<Vector2>();
+				if (_MoveDirection.magnitude > 0.5f)
+					_LastDirection = _MoveDirection;
+	        }
+		#endregion
 
-        #region Input Management
-        private void ProcessInput()
+		#region Input Actions       
+		private void BindActions()
+		{
+			_Move = _PlayerControls.Player.Move;
+			_Move.Enable();
+
+			_Interact = _PlayerControls.Player.Interact;
+			_Interact.Enable();
+			_Interact.performed += OnInteract;
+
+			_Jump = _PlayerControls.Player.Jump;
+			_Jump.Enable();
+			_Jump.performed += OnJump;
+		}
+		private void DisableActions()
+		{
+			_Move.Disable();
+			_Interact.Disable();
+			_Jump.Disable();
+		}
+        private void MovePlayer()
         {
-            switch (GetInputMode())
-            {
-                case EInputRoute.Game:
-                    GameInput();
-                    break;
-                case EInputRoute.UI:
-                    UIInput();
-                    break;
-                default:
-                    break;
-            }
-        }
-        private void GameInput()
+            if (!_RB)
+                return;
+            _RB.velocity = new Vector2(_MoveDirection.x * MovementSpeed, _RB.velocity.y);
+			transform.eulerAngles = new Vector3(transform.eulerAngles.x, _LastDirection.x > -0.1f ? 0 : 180, transform.eulerAngles.z);
+		}   
+        private void OnInteract(InputAction.CallbackContext Context)
         {
-            _IsMoving = false;
-            if (Input.GetButton("Horizontal"))
-            {
-                _IsMoving = true;
-                _MovementDirection = Input.GetAxis("Horizontal") > 0 ? EMovementDirection.Right : EMovementDirection.Left;
-            }
-            if (Input.GetButtonDown("Vertical"))
-            {
-                if(Input.GetAxis("Vertical") > 0)
-                {
-                    Jump();
-			    } 
-            }
+            Debug.Log("INTERACTING");
         }
-        private void UIInput()
-        {
+	    private void OnJump(InputAction.CallbackContext Context)
+	    {
+            if (!_RB)
+                return;
 
-        }
-        #endregion
+		    _CanJump = Mathf.Abs(_RB.velocity.y) < 0.0001f;
+		    if (!_CanJump)
+			    return;
+		    if (_RB)
+			    _RB.AddForce(new Vector2(0.0f, JumpForce));
+	    }
+	    #endregion
 
-        #region Input Actions
+	#endregion
 
-            #region Jump
-            private bool _CanJump = true;
-            private void Jump()
-            {
-                _CanJump = Mathf.Abs(_RB.velocity.y) < 0.0001f;
-                if (!_CanJump)
-                    return;
-                if (_RB)
-                    _RB.AddForce(new Vector2(0.0f, JumpForce));
-            }
-    #endregion
-
-            #region Horizontal Movement 
-            private bool _IsMoving = false;
-            private EMovementDirection _MovementDirection; //Garanteed initialization to EMovementDirection.Undefined
-            private void UpdatePlayerLocation()
-            {
-                if (!_PlayerObject)
-                    return;
-                if (_IsMoving)
-                {
-                    switch (_MovementDirection)
-                    {
-                        case EMovementDirection.Right:
-                            _PlayerObject.transform.localPosition += new Vector3(MovementSpeed * Time.deltaTime,0,0);
-                            break;
-                        case EMovementDirection.Left:
-                            _PlayerObject.transform.localPosition += new Vector3((MovementSpeed * Time.deltaTime) * -1.0f, 0, 0);
-                            break;
-                    }
-                }
-            }   
-            private void UpdatePlayerDirection()
-            {
-                if(!_PlayerObject)
-                    return;
-                Quaternion CurrentRot = _PlayerObject.transform.rotation;
-                switch (_MovementDirection)
-                {
-                    case EMovementDirection.Right:
-                        _PlayerObject.transform.rotation = new Quaternion(CurrentRot.x, 0, CurrentRot.z, CurrentRot.w);
-                        break;
-                    case EMovementDirection.Left:
-                        _PlayerObject.transform.rotation = new Quaternion(CurrentRot.x, 180, CurrentRot.z, CurrentRot.w);
-                        break;
-                }
-            }
-            #endregion
-
-    #endregion
-
-    #endregion
-
-    #region Health
-    [SerializeField]
-    private int _Health = 5;
+	#region Health
     public int GetHealth() { return _Health; }
     #endregion
 
@@ -149,13 +90,16 @@ public class Player : MonoBehaviour
      --                 Current Items Is a BitMask                 --
      ----------------------------------------------------------------
     */
-    private int _CurrentItems = 0; 
     public int GetCurrentItems() { return _CurrentItems; }
     public void TryAddItem(int Item) { _CurrentItems |= Item; }
-    #endregion
+	#endregion
 
-    #region Unity Interface
-    private void Start()
+	#region Unity Interface
+	private void Awake()
+	{
+		_PlayerControls = new PlayerInputAction();
+	}
+	private void Start()
     {
 		//SaveSystem.SaveProgress(this);
         _PlayerObject = gameObject;
@@ -168,8 +112,15 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        UpdatePlayerLocation();
-		UpdatePlayerDirection();
+        MovePlayer();
     }
-    #endregion
+	private void OnEnable()
+	{
+		BindActions();
+	}
+	private void OnDisable()
+	{
+		DisableActions();
+	}
+	#endregion
 }
