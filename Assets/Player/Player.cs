@@ -83,6 +83,14 @@ public class Player : MonoBehaviour
 
 	#region Health
     public int GetHealth() { return _Health; }
+	public void DamagePlayer() 
+	{
+		if(--_Health <= 0)
+		{
+			Destroy(gameObject);
+			//TODO: Trigger some level finish here or something
+		}
+	}
     #endregion
 
     #region Items
