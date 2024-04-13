@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 	private InputAction _Move, _Interact, _Jump;
 	private Vector2 _MoveDirection;
 	private bool _CanJump = true;
-	private int _CurrentItems = 0;
+	private ECollectibles _CurrentItems = 0;
 
 	#region Input
 
@@ -92,8 +92,8 @@ public class Player : MonoBehaviour
      --                 Current Items Is a BitMask                 --
      ----------------------------------------------------------------
     */
-    public int GetCurrentItems() { return _CurrentItems; }
-    public void TryAddItem(int Item) { _CurrentItems |= Item; }
+    public ECollectibles GetCurrentItems() { return _CurrentItems; }
+    public void TryAddItem(ECollectibles Item) { _CurrentItems |= Item; }
 	#endregion
 
 	#region Unity Interface

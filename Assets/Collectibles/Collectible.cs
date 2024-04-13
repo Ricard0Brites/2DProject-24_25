@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-	[SerializeField]
-	private ECollectibles _Item;
+	[SerializeField] private ECollectibles _Item;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -14,7 +14,7 @@ public class Collectible : MonoBehaviour
 			Player PlayerReference = collision.GetComponent<Player>();
 			if (PlayerReference)
 			{
-				PlayerReference.TryAddItem((int)_Item);
+				PlayerReference.TryAddItem(_Item);
 				if(gameObject) 
 					Destroy(gameObject);
 			}

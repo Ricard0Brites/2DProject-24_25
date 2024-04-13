@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 struct SaveData
 {
     public int PlayerHP; // int because its simpler to work on a life count basis (also lighter if we need to compare values due to lack of floating values that arent 100% accurate)
-    public int ItemsCollected;
+    public ECollectibles ItemsCollected;
     #region Items Index
     /*
       0x    0000 0001 - ??
