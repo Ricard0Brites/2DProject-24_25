@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _RB = null;
     private PlayerInputAction _PlayerControls;
 	private InputAction _Move, _Interact, _Jump;
-	private Vector2 _MoveDirection, _LastDirection;
+	private Vector2 _MoveDirection;
 	private bool _CanJump = true;
 	private int _CurrentItems = 0;
 
@@ -26,17 +26,16 @@ public class Player : MonoBehaviour
 
 	    #region Input Management
 	    private void ProcessInput()
-            {
-		        _MoveDirection = _Move.ReadValue<Vector2>();
-				if (_MoveDirection.magnitude > 0.5f)
-					_LastDirection = _MoveDirection;
-	        }
+        {
+		    _MoveDirection = _Move.ReadValue<Vector2>();
+	    }
 		#endregion
 
 		#region Input Actions       
 		private void BindActions()
 		{
 			_Move = _PlayerControls.Player.Move;
+			_Move.performed += OnMove;
 			_Move.Enable();
 
 			_Interact = _PlayerControls.Player.Interact;
@@ -58,8 +57,11 @@ public class Player : MonoBehaviour
             if (!_RB)
                 return;
             _RB.velocity = new Vector2(_MoveDirection.x * MovementSpeed, _RB.velocity.y);
-			transform.eulerAngles = new Vector3(transform.eulerAngles.x, _LastDirection.x > -0.1f ? 0 : 180, transform.eulerAngles.z);
 		}   
+		private void OnMove(InputAction.CallbackContext Context)
+		{
+			transform.eulerAngles = new Vector3(transform.eulerAngles.x, Context.ReadValue<Vector2>().x > 0 ? 0 : 180, transform.eulerAngles.z);
+		}
         private void OnInteract(InputAction.CallbackContext Context)
         {
             Debug.Log("INTERACTING");
