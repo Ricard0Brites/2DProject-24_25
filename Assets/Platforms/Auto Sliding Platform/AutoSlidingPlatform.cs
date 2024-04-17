@@ -5,12 +5,14 @@ using UnityEngine;
 public class AutoSlidingPlatform : MonoBehaviour
 {
     [SerializeField] private float _TravelUnits = 2.0f, _TravelSpeed = 0.1f, _FreezeTimeAtDirectionChange = 0.5f;
-	[SerializeField] private bool _PauseAtEnds = true;
+	[SerializeField] private bool _PauseAtEnds = true, _IsInTogglingMode = false;
 	private bool _PauseMovement = false;
 	private float _StartLocation = 0.0f;
 	private void Start()
 	{
 		_StartLocation = transform.position.x;
+		transform.position -= Vector3.right * _TravelUnits;
+		_TravelSpeed *= _IsInTogglingMode ? -1.0f : 1.0f;
 	}
 	void Update()
     {
@@ -20,7 +22,8 @@ public class AutoSlidingPlatform : MonoBehaviour
 			{
 				_TravelSpeed *= -1.0f;
 				_PauseMovement = _PauseAtEnds;
-				StartCoroutine(UnfreezePlatform());
+				if(!_IsInTogglingMode)
+					StartCoroutine(UnfreezePlatform());
 			}
 			transform.position += Vector3.right * _TravelSpeed * Time.deltaTime;
 		}
@@ -29,5 +32,14 @@ public class AutoSlidingPlatform : MonoBehaviour
 	{
 		yield return new WaitForSeconds(_FreezeTimeAtDirectionChange);
 		_PauseMovement = false;
+	}
+	public void ToggleSlidingPlatform()
+	{
+		if(_IsInTogglingMode && _PauseMovement)
+			_PauseMovement = !_PauseMovement;
+	}
+	public bool IsPlatformMoving()
+	{
+		return !_PauseMovement;
 	}
 }
