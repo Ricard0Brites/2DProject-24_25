@@ -10,7 +10,7 @@ public class PlatformToggleButton : MonoBehaviour
 	{
 		if(collision.CompareTag("Player") && PlatformToToggle)
 		{
-			PlatformToToggle.GetComponent<AutoSlidingPlatform>().ToggleSlidingPlatform();
+			PlatformToToggle.GetComponent<SlidingPlatform>().ToggleSlidingPlatform();
 		}
 	}
 }

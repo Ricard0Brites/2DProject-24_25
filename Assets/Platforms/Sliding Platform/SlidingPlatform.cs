@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoSlidingPlatform : MonoBehaviour
+public class SlidingPlatform : MonoBehaviour
 {
     [SerializeField] private float _TravelUnits = 2.0f, _TravelSpeed = 0.1f, _FreezeTimeAtDirectionChange = 0.5f;
 	[SerializeField] private bool _PauseAtEnds = true, _IsInTogglingMode = false;
