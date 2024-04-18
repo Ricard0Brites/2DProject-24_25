@@ -14,12 +14,14 @@ public class LateralMovement : MonoBehaviour
 	private void ToggleMovementDirection() 
 	{
 		_Direction = !_Direction;
-		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, _Direction ? 0 : 180, transform.rotation.eulerAngles.z));
+		//transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, _Direction ? 0 : 180, transform.rotation.eulerAngles.z));
+		transform.right = -transform.right;
 	}
 	private void Move()
 	{
 		if (_CanMove)
 			transform.position += new Vector3((_MovementSpeed * (_Direction ? 1 : -1)) * Time.deltaTime, 0, 0);
+		// change with velocity RB
 	}
 	void FixedUpdate()
 	{

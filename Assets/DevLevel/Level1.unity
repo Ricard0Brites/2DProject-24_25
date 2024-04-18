@@ -456,7 +456,7 @@ Transform:
   m_GameObject: {fileID: 672228909}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4, y: -0.26, z: 0}
+  m_LocalPosition: {x: 6.4, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -566,11 +566,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f454683a8ddb5e74d811ec3fd8b15ce0, type: 3}
---- !u!1 &1078190764 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7577878395672397829, guid: f454683a8ddb5e74d811ec3fd8b15ce0, type: 3}
+--- !u!114 &1078190765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6305155292372219222, guid: f454683a8ddb5e74d811ec3fd8b15ce0, type: 3}
   m_PrefabInstance: {fileID: 1078190763}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8b0a8aff23a5a4197ca86c32a9a81a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1194883081
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,8 +934,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1529164954}
-  - component: {fileID: 1529164953}
-  - component: {fileID: 1529164952}
+  - component: {fileID: 1529164955}
   m_Layer: 0
   m_Name: Camera Confiner
   m_TagString: Untagged
@@ -937,8 +942,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1529164952
-BoxCollider2D:
+--- !u!4 &1529164954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529164951}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1529164955
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -979,51 +999,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 40, y: 20}
-  m_EdgeRadius: 0
---- !u!50 &1529164953
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529164951}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!4 &1529164954
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529164951}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -17.17854, y: 7.99474}
+      - {x: -17.15914, y: -9.122593}
+      - {x: 42.32305, y: -9.568959}
+      - {x: 42.310673, y: 8.220155}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1629806138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,7 +1278,7 @@ Transform:
   m_GameObject: {fileID: 1776324350}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.42, y: -0.29, z: 0}
+  m_LocalPosition: {x: 4.42, y: 2.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1630,7 +1612,7 @@ PrefabInstance:
     - target: {fileID: 3408700773327353028, guid: ba3c4cc40c7d9e942b356cab9708d90d, type: 3}
       propertyPath: PlatformToToggle
       value: 
-      objectReference: {fileID: 1078190764}
+      objectReference: {fileID: 1078190765}
     - target: {fileID: 6083912818420598311, guid: ba3c4cc40c7d9e942b356cab9708d90d, type: 3}
       propertyPath: m_Name
       value: Toggle Platform Button
@@ -1818,7 +1800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BoundingShape2D: {fileID: 1529164952}
+  m_BoundingShape2D: {fileID: 1529164955}
   m_Damping: 0.5
   m_MaxWindowSize: -1
 --- !u!1660057539 &9223372036854775807

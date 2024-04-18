@@ -14,7 +14,7 @@ public class SlidingPlatform : MonoBehaviour
 		transform.position -= Vector3.right * _TravelUnits;
 		_TravelSpeed *= _IsInTogglingMode ? -1.0f : 1.0f;
 	}
-	void Update()
+	private void Update()
     {
 		if(!_PauseMovement)
 		{

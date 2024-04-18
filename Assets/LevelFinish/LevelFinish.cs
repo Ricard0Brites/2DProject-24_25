@@ -7,10 +7,9 @@ public class LevelFinish : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Player PlayerObject = collision.gameObject.GetComponent<Player>();
-		if(PlayerObject)
+		if (collision.TryGetComponent<Player>(out Player _playerObject))
 		{
-			if ((NecessaryObjects & PlayerObject.GetCurrentItems()) == NecessaryObjects)
+			if ((NecessaryObjects & _playerObject.GetCurrentItems()) == NecessaryObjects)
 			{
 				Debug.Log("Valid");
 			}

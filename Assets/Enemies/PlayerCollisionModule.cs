@@ -11,7 +11,7 @@ public class PlayerCollisionModule : MonoBehaviour
 			if(Vector3.Angle(Vector3.up, (collision.collider.transform.position) - transform.position) > _PlayerKillAngle / 2)
 			{
 				//Kill Player
-				Player PlayerReference = collision.collider.gameObject.GetComponent<Player>();
+				Player PlayerReference = collision.gameObject.GetComponent<Player>();
 				if (PlayerReference)
 					PlayerReference.DamagePlayer();
 			}
