@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public enum EMovementDirection
 {
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private float MovementSpeed = 1.0f;
 	[SerializeField] private float JumpForce = 1.0f;
 	[SerializeField] private int _Health = 5;
+	[SerializeField] private float _DamageForce = 200.0f;
 
 	private GameObject _PlayerObject = null;
     private Rigidbody2D _RB = null;
@@ -92,7 +94,12 @@ public class Player : MonoBehaviour
 		}
 	}
     #endregion
-
+	public void TriggerPlayerDamageReaction(Vector2 Direction)
+	{
+		bool Right = Vector2.Angle(Vector2.up, Direction) < 90;
+		if (_RB)
+			_RB.AddForce(((Vector2.right * (Right ? 1 : -1)) * _DamageForce) + Vector2.up * (JumpForce / 2));
+	}
     #region Items
 
     /*
