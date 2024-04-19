@@ -38,31 +38,9 @@ public class PlayerCollisionModule : MonoBehaviour
 		if (SR)
 			SR.color = new Color(0, 0, 0, 1);
 
-		int OriginalReceiveMask = 0, OriginalSendMask = 0, OriginalExcludeMask = 0;
+		int OriginalExcludeMask = 0;
 		if (Collider)
 		{
-			if (Collider.forceReceiveLayers == -1)
-			{
-				OriginalReceiveMask = Collider.forceReceiveLayers;
-				Collider.forceReceiveLayers = (1 << gameObject.layer) ^ 0x7FFFFFFF; // 0x7FFFFFFF is a full signed int 
-			}
-			else
-			{
-				OriginalReceiveMask = Collider.forceReceiveLayers;
-				Collider.forceReceiveLayers &= ~(1 << gameObject.layer);
-			}
-
-			if (Collider.forceSendLayers == -1)
-			{
-				OriginalSendMask = Collider.forceSendLayers;
-				Collider.forceSendLayers = (1 << gameObject.layer) ^ 0x7FFFFFFF; // 0x7FFFFFFF is a full signed int 
-			}
-			else
-			{
-				OriginalSendMask = Collider.forceSendLayers;
-				Collider.forceSendLayers &= ~(1 << gameObject.layer);
-			}
-
 			if (Collider.excludeLayers == -1)
 			{
 				OriginalExcludeMask = Collider.excludeLayers;
@@ -81,8 +59,6 @@ public class PlayerCollisionModule : MonoBehaviour
 			SR.color = new Color(1, 0, 0, 1);
 		if (Collider)
 		{
-			Collider.forceReceiveLayers = OriginalReceiveMask;
-			Collider.forceSendLayers = OriginalSendMask;
 			Collider.excludeLayers = OriginalExcludeMask;
 		}
 	}
