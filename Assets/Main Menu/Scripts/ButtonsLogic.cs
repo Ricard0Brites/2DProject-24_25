@@ -1,15 +1,9 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonsLogic : MonoBehaviour
 {
-    public SceneAsset FirstLevelScene;
+    public int FirstLevelSceneIndex = -1;
     public void Quit()
     {
         Application.Quit();
@@ -21,9 +15,7 @@ public class ButtonsLogic : MonoBehaviour
     public void StartNewGame()
     {
         Debug.Log("Starting New Game");
-        if (!FirstLevelScene)
-            return;
-        
-        SceneManager.LoadScene(FirstLevelScene.name); 
+        if (FirstLevelSceneIndex > 0)
+            SceneManager.LoadScene(FirstLevelSceneIndex); 
     }
 }
