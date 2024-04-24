@@ -4,26 +4,31 @@ public class LateralMovement : MonoBehaviour
 {
 	
 	[SerializeField]
-	private float _MovementSpeed = 5.0f;
+	private float _movementSpeed = 5.0f;
 	[SerializeField]
 	private string _WallTag = "Barrier";
 
-	private bool _CanMove = true;
-	private bool _Direction = true;
+	private bool _canMove = true;
+	private bool _direction = true;
+	private Rigidbody2D _rB;
 
+	private void Start()
+	{
+		_rB = GetComponent<Rigidbody2D>();
+	}
 	private void ToggleMovementDirection() 
 	{
-		_Direction = !_Direction;
-		//transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, _Direction ? 0 : 180, transform.rotation.eulerAngles.z));
+		_direction = !_direction;
 		transform.right = -transform.right;
 	}
 	private void Move()
 	{
-		if (_CanMove)
-			transform.position += new Vector3((_MovementSpeed * (_Direction ? 1 : -1)) * Time.deltaTime, 0, 0);
-		// change with velocity RB
+		if (!_canMove)
+			return;
+		if(_rB)
+			_rB.velocity = new Vector2((_movementSpeed * (_direction ? 1 : -1)), _rB.velocity.y);
 	}
-	void FixedUpdate()
+	private void Update()
 	{
 		Move();
 	}
