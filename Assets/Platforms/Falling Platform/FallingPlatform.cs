@@ -15,9 +15,9 @@ public class FallingPlatform : MonoBehaviour
 		_myRB = GetComponent<Rigidbody2D>();
 		_initialLocation = transform.position;
 	}
-	private void Update()
+	private void FixedUpdate()
 	{
-		if(_shouldResetPosition)
+		if (_shouldResetPosition)
 		{
 			transform.position += Vector3.up * Mathf.Clamp(_initialLocation.y - transform.position.y, -_maxMovementSpeed * Time.deltaTime, _maxMovementSpeed * Time.deltaTime);
 			if (Mathf.Approximately(transform.position.y, _initialLocation.y))
