@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Main Menu/Main Menu.unity
     guid: 5208600c23b9b584bac5107862e27884
   - enabled: 1
-    path: Assets/DevLevel/Level1.unity
+    path: Assets/Dev/DevLevel/Level1.unity
     guid: ae3821295d27ea34d8f718b237190435
   - enabled: 1
     path: Assets/GameLevels/NGD_L1.unity
