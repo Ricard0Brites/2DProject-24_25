@@ -18,4 +18,8 @@ public class ButtonsLogic : MonoBehaviour
         if (FirstLevelSceneIndex > 0)
             SceneManager.LoadScene(FirstLevelSceneIndex); 
     }
+    public void OpenSettings()
+    {
+        
+    }
 }
