@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 65738264}
   - component: {fileID: 65738263}
   - component: {fileID: 65738262}
+  - component: {fileID: 65738265}
   m_Layer: 5
   m_Name: Save Button (2)
   m_TagString: Untagged
@@ -244,6 +245,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65738260}
   m_CullTransparentMesh: 1
+--- !u!114 &65738265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65738260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32c2c4b769365848894bd893d2c61af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveIndex: -1
 --- !u!1 &144994301
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +441,7 @@ GameObject:
   - component: {fileID: 414459717}
   - component: {fileID: 414459716}
   - component: {fileID: 414459715}
+  - component: {fileID: 414459718}
   m_Layer: 5
   m_Name: Save Button (0)
   m_TagString: Untagged
@@ -536,6 +551,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414459713}
   m_CullTransparentMesh: 1
+--- !u!114 &414459718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414459713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32c2c4b769365848894bd893d2c61af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveIndex: -1
 --- !u!1 &505466235
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +788,7 @@ GameObject:
   - component: {fileID: 569834785}
   - component: {fileID: 569834784}
   - component: {fileID: 569834783}
+  - component: {fileID: 569834786}
   m_Layer: 5
   m_Name: Save Button (3)
   m_TagString: Untagged
@@ -869,6 +898,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569834781}
   m_CullTransparentMesh: 1
+--- !u!114 &569834786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569834781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32c2c4b769365848894bd893d2c61af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveIndex: -1
 --- !u!1 &574522617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,6 +1490,7 @@ GameObject:
   - component: {fileID: 1061330047}
   - component: {fileID: 1061330046}
   - component: {fileID: 1061330045}
+  - component: {fileID: 1061330048}
   m_Layer: 5
   m_Name: Save Button (4)
   m_TagString: Untagged
@@ -1557,6 +1600,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061330043}
   m_CullTransparentMesh: 1
+--- !u!114 &1061330048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061330043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32c2c4b769365848894bd893d2c61af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveIndex: -1
 --- !u!1 &1074471608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,6 +1758,7 @@ GameObject:
   - component: {fileID: 1124754784}
   - component: {fileID: 1124754783}
   - component: {fileID: 1124754782}
+  - component: {fileID: 1124754785}
   m_Layer: 5
   m_Name: Save Button (1)
   m_TagString: Untagged
@@ -1811,6 +1868,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124754780}
   m_CullTransparentMesh: 1
+--- !u!114 &1124754785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124754780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32c2c4b769365848894bd893d2c61af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveIndex: -1
 --- !u!1 &1183265024
 GameObject:
   m_ObjectHideFlags: 0
