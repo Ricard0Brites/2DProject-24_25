@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.InputSystem;
 
 public enum EMovementDirection
@@ -95,7 +96,7 @@ public class Player : MonoBehaviour
 	    }
 		private void OnAttack(InputAction.CallbackContext Context)
 		{
-			
+			// TODO Implement Attack Logic
 		}
 		#endregion
 
@@ -112,12 +113,14 @@ public class Player : MonoBehaviour
 		}
 	}
     #endregion
+
 	public void TriggerPlayerDamageReaction(Vector2 Direction)
 	{
 		bool Right = Vector2.Angle(Vector2.up, Direction) < 90;
 		if (_rB)
 			_rB.AddForce(((Vector2.right * (Right ? 1 : -1)) * _damageForce) + Vector2.up * (_jumpForce / 2));
 	}
+
     #region Items
 
     /*
