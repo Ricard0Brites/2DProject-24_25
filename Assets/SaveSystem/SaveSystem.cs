@@ -7,19 +7,6 @@ struct SaveData
 {
     public int PlayerHP; // int because its simpler to work on a life count basis (also lighter if we need to compare values due to lack of floating values that arent 100% accurate)
     public ECollectibles ItemsCollected;
-    #region Items Index
-    /*
-      0x    0000 0001 - ??
-      0x    0000 0010 - ??
-      0x    0000 0100 - ??
-      0x    0000 1000 - ??
-      0x    0001 0000 - ??
-      0x    0010 0000 - ??
-      0x    0100 0000 - ??
-      0x    1000 0000 - ??
-      ...
-    */
-    #endregion
     public Scene CurrentScene; //Level in which the player is located
 }
 public struct SaveFileData
@@ -31,12 +18,12 @@ public class SaveSystem : MonoBehaviour
 {
     private static string SavesLocation = "Assets/SaveSystem/Saves/";
     public static int SaveToOverride = -1;
-    private static int GetNumberOfSaves()
+    public static int GetNumberOfSaves()
     {
         DirectoryInfo dir = new DirectoryInfo(SavesLocation);
         if (dir.Exists)
         {
-            return dir.GetFiles().Length;
+            return dir.GetFiles().Length / 2;
         }
         return 0;
         
@@ -74,6 +61,12 @@ public class SaveSystem : MonoBehaviour
         {
             string JSON = File.ReadAllText(FilePath);
             SaveData SaveInfo = JsonUtility.FromJson<SaveData>(JSON);
+
+            // TODO If GD comes back
+            // load scene 
+            // set character hp
+            // set character items collected
+            // Remove Collected Items from the scene
             return true;
         }
         return false;
@@ -95,11 +88,13 @@ public class SaveSystem : MonoBehaviour
         if (dir.Exists)
         {
             FileInfo[] Files = dir.GetFiles();
-            ListToReturn = new SaveFileData[Files.Length];
+            ListToReturn = new SaveFileData[Files.Length / 2];
 
             int Index = 0;
             foreach(FileInfo file in Files)
             {
+                if (file.Name.Contains(".meta"))
+                    continue;
                 ListToReturn[Index].CreationDateTime = file.CreationTime;
                 ListToReturn[Index++].FileName = file.Name;
             }
