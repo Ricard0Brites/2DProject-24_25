@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 296487646019998154}
   - component: {fileID: 3476613038833394838}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,10 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738e274932d73814182040af06dbc58d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 7.5
-  JumpForce: 4600
-  _Health: 5
-  _DamageForce: 200
+  _movementSpeed: 10
+  _jumpForce: 2800
+  _health: 5
+  _damageForce: 800
+  _isSecondaryPlayer: 0
 --- !u!50 &2075617122846259328
 Rigidbody2D:
   serializedVersion: 4

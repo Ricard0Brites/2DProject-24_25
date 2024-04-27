@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public enum EMovementDirection
 {
@@ -11,83 +10,102 @@ public enum EMovementDirection
 
 public class Player : MonoBehaviour
 {
-	[SerializeField] private float MovementSpeed = 1.0f;
-	[SerializeField] private float JumpForce = 1.0f;
-	[SerializeField] private int _Health = 5;
-	[SerializeField] private float _DamageForce = 200.0f;
+	[SerializeField] private float _movementSpeed = 1.0f;
+	[SerializeField] private float _jumpForce = 1.0f;
+	[SerializeField] private int _health = 5;
+	[SerializeField] private float _damageForce = 200.0f;
+	[SerializeField] private bool _isSecondaryPlayer = false;
 
-	private GameObject _PlayerObject = null;
-    private Rigidbody2D _RB = null;
-    private PlayerInputAction _PlayerControls;
-	private InputAction _Move, _Interact, _Jump;
-	private Vector2 _MoveDirection;
-	private bool _CanJump = true;
-	private ECollectibles _CurrentItems = 0;
+	private GameObject _playerObject = null;
+    private Rigidbody2D _rB = null;
+    private PlayerInputAction _playerControls;
+    private PlayerInputAction1 _secondaryPlayerControls;
+	private InputAction _move, _attack, _jump;
+	private Vector2 _moveDirection;
+	private bool _canJump = true;
+	private ECollectibles _currentItems = 0;
 
 	#region Input
 
 	    #region Input Management
 	    private void ProcessInput()
         {
-		    _MoveDirection = _Move.ReadValue<Vector2>();
+		    _moveDirection = _move.ReadValue<Vector2>();
 	    }
 		#endregion
 
 		#region Input Actions       
 		private void BindActions()
 		{
-			_Move = _PlayerControls.Player.Move;
-			_Move.performed += OnMove;
-			_Move.Enable();
+			if(!_isSecondaryPlayer)
+			{
+				_move = _playerControls.Player.Move;
+				_move.performed += OnMove;
+				_move.Enable();
 
-			_Interact = _PlayerControls.Player.Interact;
-			_Interact.Enable();
-			_Interact.performed += OnInteract;
+				_attack = _playerControls.Player.Attack;
+				_attack.performed += OnAttack;
+				_attack.Enable();
+			
+				_jump = _playerControls.Player.Jump;
+				_jump.performed += OnJump;
+				_jump.Enable();
+			}
+			else
+			{
+				_move = _secondaryPlayerControls.Player.Move;
+				_move.performed += OnMove;
+				_move.Enable();
 
-			_Jump = _PlayerControls.Player.Jump;
-			_Jump.Enable();
-			_Jump.performed += OnJump;
+				_attack = _secondaryPlayerControls.Player.Attack;
+				_attack.performed += OnAttack;
+				_attack.Enable();
+			
+				_jump = _secondaryPlayerControls.Player.Jump;
+				_jump.performed += OnJump;
+				_jump.Enable();
+			}
 		}
 		private void DisableActions()
 		{
-			_Move.Disable();
-			_Interact.Disable();
-			_Jump.Disable();
+			_move.Disable();
+			_attack.Disable();
+			_jump.Disable();
 		}
         private void MovePlayer()
         {
-            if (!_RB)
+            if (!_rB)
                 return;
-            _RB.velocity = new Vector2(_MoveDirection.x * MovementSpeed, _RB.velocity.y);
+            _rB.velocity = new Vector2(_moveDirection.x * _movementSpeed, _rB.velocity.y);
 		}   
 		private void OnMove(InputAction.CallbackContext Context)
 		{
 			transform.eulerAngles = new Vector3(transform.eulerAngles.x, Context.ReadValue<Vector2>().x > 0 ? 0 : 180, transform.eulerAngles.z);
 		}
-        private void OnInteract(InputAction.CallbackContext Context)
-        {
-            Debug.Log("INTERACTING");
-        }
 	    private void OnJump(InputAction.CallbackContext Context)
 	    {
-            if (!_RB)
+            if (!_rB)
                 return;
 
-		    _CanJump = Mathf.Abs(_RB.velocity.y) < 0.0001f;
-		    if (!_CanJump)
+		    _canJump = Mathf.Abs(_rB.velocity.y) < 0.0001f;
+		    if (!_canJump)
 			    return;
-		    if (_RB)
-			    _RB.AddForce(new Vector2(0.0f, JumpForce));
+		    if (_rB)
+			    _rB.AddForce(new Vector2(0.0f, _jumpForce));
 	    }
-	    #endregion
+		private void OnAttack(InputAction.CallbackContext Context)
+		{
+			
+		}
+		#endregion
 
 	#endregion
 
 	#region Health
-    public int GetHealth() { return _Health; }
+	public int GetHealth() { return _health; }
 	public void DamagePlayer() 
 	{
-		if(--_Health <= 0)
+		if(--_health <= 0)
 		{
 			Destroy(gameObject);
 			//TODO: Trigger some level finish here or something
@@ -97,8 +115,8 @@ public class Player : MonoBehaviour
 	public void TriggerPlayerDamageReaction(Vector2 Direction)
 	{
 		bool Right = Vector2.Angle(Vector2.up, Direction) < 90;
-		if (_RB)
-			_RB.AddForce(((Vector2.right * (Right ? 1 : -1)) * _DamageForce) + Vector2.up * (JumpForce / 2));
+		if (_rB)
+			_rB.AddForce(((Vector2.right * (Right ? 1 : -1)) * _damageForce) + Vector2.up * (_jumpForce / 2));
 	}
     #region Items
 
@@ -107,20 +125,21 @@ public class Player : MonoBehaviour
      --                 Current Items Is a BitMask                 --
      ----------------------------------------------------------------
     */
-    public ECollectibles GetCurrentItems() { return _CurrentItems; }
-    public void TryAddItem(ECollectibles Item) { _CurrentItems |= Item; }
+    public ECollectibles GetCurrentItems() { return _currentItems; }
+    public void TryAddItem(ECollectibles Item) { _currentItems |= Item; }
 	#endregion
 
 	#region Unity Interface
 	private void Awake()
 	{
-		_PlayerControls = new PlayerInputAction();
+		_playerControls = new PlayerInputAction();
+		_secondaryPlayerControls = new PlayerInputAction1();
 	}
 	private void Start()
     {
 		//SaveSystem.SaveProgress(this);
-        _PlayerObject = gameObject;
-        _RB = GetComponent<Rigidbody2D>();
+        _playerObject = gameObject;
+        _rB = GetComponent<Rigidbody2D>();
 
     }
     private void Update()
