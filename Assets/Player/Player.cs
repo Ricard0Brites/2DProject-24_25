@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
 	[SerializeField] private int _health = 5;
 	[SerializeField] private float _damageForce = 200.0f;
 	[SerializeField] private bool _isSecondaryPlayer = false;
+	[SerializeField] private float _attackRange = 1.0f;
 
 	private GameObject _playerObject = null;
     private Rigidbody2D _rB = null;
+	private CapsuleCollider2D _myCollider = null;
     private PlayerInputAction _playerControls;
     private PlayerInputAction1 _secondaryPlayerControls;
 	private InputAction _move, _attack, _jump;
@@ -26,10 +28,13 @@ public class Player : MonoBehaviour
 	private bool _canJump = true;
 	private ECollectibles _currentItems = 0;
 
+	public delegate void OnPlayerTakeDamage(bool IsSecondaryPlayer);
+	public event OnPlayerTakeDamage OnPlayerTakeDamageDelegate;
+
 	#region Input
 
-	    #region Input Management
-	    private void ProcessInput()
+	#region Input Management
+	private void ProcessInput()
         {
 		    _moveDirection = _move.ReadValue<Vector2>();
 	    }
@@ -96,7 +101,12 @@ public class Player : MonoBehaviour
 	    }
 		private void OnAttack(InputAction.CallbackContext Context)
 		{
-			// TODO Implement Attack Logic
+			RaycastHit2D HitResult = Physics2D.Raycast(transform.position + (transform.right * (_myCollider.bounds.extents.x + 0.01f)), transform.right, _attackRange, 0x7FFFFFFF);
+			if (!HitResult)
+				return;
+			Player OtherPlayer = HitResult.collider.GetComponent<Player>();
+			if (OtherPlayer)
+				OtherPlayer.DamagePlayer();
 		}
 		#endregion
 
@@ -106,29 +116,29 @@ public class Player : MonoBehaviour
 	public int GetHealth() { return _health; }
 	public void DamagePlayer() 
 	{
+		OnPlayerTakeDamageDelegate.Invoke(_isSecondaryPlayer);
 		if(--_health <= 0)
 		{
 			Destroy(gameObject);
 			//TODO: Trigger some level finish here or something
 		}
 	}
-    #endregion
-
 	public void TriggerPlayerDamageReaction(Vector2 Direction)
 	{
 		bool Right = Vector2.Angle(Vector2.up, Direction) < 90;
 		if (_rB)
 			_rB.AddForce(((Vector2.right * (Right ? 1 : -1)) * _damageForce) + Vector2.up * (_jumpForce / 2));
 	}
+	#endregion
 
-    #region Items
+	#region Items
 
-    /*
+	/*
      ----------------------------------------------------------------
      --                 Current Items Is a BitMask                 --
      ----------------------------------------------------------------
     */
-    public ECollectibles GetCurrentItems() { return _currentItems; }
+	public ECollectibles GetCurrentItems() { return _currentItems; }
     public void TryAddItem(ECollectibles Item) { _currentItems |= Item; }
 	#endregion
 
@@ -143,6 +153,7 @@ public class Player : MonoBehaviour
 		//SaveSystem.SaveProgress(this);
         _playerObject = gameObject;
         _rB = GetComponent<Rigidbody2D>();
+		_myCollider = GetComponent<CapsuleCollider2D>();
 
     }
     private void Update()
