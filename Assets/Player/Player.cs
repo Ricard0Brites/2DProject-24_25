@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
@@ -17,13 +18,13 @@ public class Player : MonoBehaviour
 	[SerializeField] private float _damageForce = 200.0f;
 	[SerializeField] private bool _isSecondaryPlayer = false;
 	[SerializeField] private float _attackRange = 1.0f;
-
+	[SerializeField] private GameObject _pauseMenuContainer;
 	private GameObject _playerObject = null;
     private Rigidbody2D _rB = null;
 	private CapsuleCollider2D _myCollider = null;
     private PlayerInputAction _playerControls;
     private PlayerInputAction1 _secondaryPlayerControls;
-	private InputAction _move, _attack, _jump;
+	private InputAction _move, _attack, _jump, _togglePauseMenu;
 	private Vector2 _moveDirection;
 	private bool _canJump = true;
 	private ECollectibles _currentItems = 0;
@@ -33,8 +34,8 @@ public class Player : MonoBehaviour
 
 	#region Input
 
-	#region Input Management
-	private void ProcessInput()
+		#region Input Management
+		private void ProcessInput()
         {
 		    _moveDirection = _move.ReadValue<Vector2>();
 	    }
@@ -56,6 +57,10 @@ public class Player : MonoBehaviour
 				_jump = _playerControls.Player.Jump;
 				_jump.performed += OnJump;
 				_jump.Enable();
+
+				_togglePauseMenu = _playerControls.Player.TogglePauseMenu;
+				_togglePauseMenu.performed += OnTogglePauseMenu;
+				_togglePauseMenu.Enable();
 			}
 			else
 			{
@@ -74,9 +79,14 @@ public class Player : MonoBehaviour
 		}
 		private void DisableActions()
 		{
-			_move.Disable();
-			_attack.Disable();
-			_jump.Disable();
+			if(!_move.IsUnityNull())
+				_move.Disable();
+			if (!_attack.IsUnityNull())
+				_attack.Disable();
+			if(!_jump.IsUnityNull())
+				_jump.Disable();
+			if(!_togglePauseMenu.IsUnityNull())
+				_togglePauseMenu.Disable();
 		}
         private void MovePlayer()
         {
@@ -107,6 +117,11 @@ public class Player : MonoBehaviour
 			Player OtherPlayer = HitResult.collider.GetComponent<Player>();
 			if (OtherPlayer)
 				OtherPlayer.DamagePlayer();
+		}
+		private void OnTogglePauseMenu(InputAction.CallbackContext Context)
+		{
+			if (_pauseMenuContainer)
+				_pauseMenuContainer.SetActive(!_pauseMenuContainer.activeInHierarchy);
 		}
 		#endregion
 

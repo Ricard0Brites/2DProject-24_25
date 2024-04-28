@@ -54,7 +54,8 @@ MonoBehaviour:
   _health: 5
   _damageForce: 800
   _isSecondaryPlayer: 0
-  _attackRange: 0
+  _attackRange: 5
+  _pauseMenuContainer: {fileID: 0}
 --- !u!50 &2075617122846259328
 Rigidbody2D:
   serializedVersion: 4
