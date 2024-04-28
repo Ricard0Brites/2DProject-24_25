@@ -2,6 +2,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public enum EMovementDirection
 {
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
 	[SerializeField] private bool _isSecondaryPlayer = false;
 	[SerializeField] private float _attackRange = 1.0f;
 	[SerializeField] private GameObject _pauseMenuContainer;
+	[SerializeField] private float _killY = -50;
+
 	private GameObject _playerObject = null;
     private Rigidbody2D _rB = null;
 	private CapsuleCollider2D _myCollider = null;
@@ -174,6 +178,9 @@ public class Player : MonoBehaviour
     private void Update()
     {
         ProcessInput();
+
+		if (transform.position.y < _killY)
+			SceneManager.LoadScene(0);
     }
     private void FixedUpdate()
     {

@@ -55,6 +55,8 @@ MonoBehaviour:
   _damageForce: 800
   _isSecondaryPlayer: 1
   _attackRange: 0
+  _pauseMenuContainer: {fileID: 0}
+  _killY: -50
 --- !u!50 &2075617122846259328
 Rigidbody2D:
   serializedVersion: 4
