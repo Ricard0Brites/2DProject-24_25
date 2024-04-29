@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
 	[SerializeField] private float _attackRange = 1.0f;
 	[SerializeField] private GameObject _pauseMenuContainer;
 	[SerializeField] private float _killY = -50;
+
+	[DoNotSerialize] public bool IsInsideSpikes = false;
 
 	private GameObject _playerObject = null;
     private Rigidbody2D _rB = null;
