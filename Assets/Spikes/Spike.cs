@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
 	[SerializeField] private float _timeUntilPlayerCanBeDamagedAgain = 2.0f;
+	[NonSerialized] public bool IsFallingSpike = false;
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.CompareTag("Player"))
@@ -13,6 +16,11 @@ public class Spike : MonoBehaviour
 			{
 				if(!PlayerReference.IsInsideSpikes)
 				{
+					if(IsFallingSpike)
+					{
+						Collider2D ColliderComponent = GetComponent<Collider2D>();
+						ColliderComponent.isTrigger = false;
+					}
 					PlayerReference.IsInsideSpikes = true;
 					PlayerReference.DamagePlayer();
 				}
@@ -32,7 +40,7 @@ public class Spike : MonoBehaviour
 	}
 	private IEnumerator ResetState(Player PlayerReference)
 	{
-		if (PlayerReference)
+		if (PlayerReference && !IsFallingSpike)
 		{
 			yield return new WaitForSeconds(_timeUntilPlayerCanBeDamagedAgain);
 			PlayerReference.IsInsideSpikes = false;

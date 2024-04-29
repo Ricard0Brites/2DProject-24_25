@@ -1,10 +1,7 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public enum EMovementDirection
 {
@@ -24,7 +21,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private GameObject _pauseMenuContainer;
 	[SerializeField] private float _killY = -50;
 
-	[DoNotSerialize] public bool IsInsideSpikes = false;
+	[NonSerialized] public bool IsInsideSpikes = false;
 
 	private GameObject _playerObject = null;
     private Rigidbody2D _rB = null;
@@ -86,13 +83,13 @@ public class Player : MonoBehaviour
 		}
 		private void DisableActions()
 		{
-			if(!_move.IsUnityNull())
+			if(_move != null)
 				_move.Disable();
-			if (!_attack.IsUnityNull())
+			if (_attack != null)
 				_attack.Disable();
-			if(!_jump.IsUnityNull())
+			if(_jump != null)
 				_jump.Disable();
-			if(!_togglePauseMenu.IsUnityNull())
+			if(_togglePauseMenu != null)
 				_togglePauseMenu.Disable();
 		}
         private void MovePlayer()
