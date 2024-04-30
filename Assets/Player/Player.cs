@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private float _attackRange = 1.0f;
 	[SerializeField] private GameObject _pauseMenuContainer;
 	[SerializeField] private float _killY = -50;
+	[SerializeField] private GameObject _throwablePrefab = null, _throwablesSpawnLocation = null;
 
 	[NonSerialized] public bool IsInsideSpikes = false;
 
@@ -32,6 +34,10 @@ public class Player : MonoBehaviour
 	private Vector2 _moveDirection;
 	private bool _canJump = true;
 	private ECollectibles _currentItems = 0;
+	private GameObject _currentThrowable = null;
+	private EMovementDirection _currentDirection;
+	
+	public bool HasThrowable = false;
 
 	public delegate void OnPlayerTakeDamage(bool IsSecondaryPlayer);
 	public event OnPlayerTakeDamage OnPlayerTakeDamageDelegate;
@@ -101,6 +107,7 @@ public class Player : MonoBehaviour
 		private void OnMove(InputAction.CallbackContext Context)
 		{
 			transform.eulerAngles = new Vector3(transform.eulerAngles.x, Context.ReadValue<Vector2>().x > 0 ? 0 : 180, transform.eulerAngles.z);
+			_currentDirection = Context.ReadValue<Vector2>().x > 0 ? EMovementDirection.Right : EMovementDirection.Left;
 		}
 	    private void OnJump(InputAction.CallbackContext Context)
 	    {
@@ -115,12 +122,21 @@ public class Player : MonoBehaviour
 	    }
 		private void OnAttack(InputAction.CallbackContext Context)
 		{
-			RaycastHit2D HitResult = Physics2D.Raycast(transform.position + (transform.right * (_myCollider.bounds.extents.x + 0.01f)), transform.right, _attackRange, 0x7FFFFFFF);
-			if (!HitResult)
-				return;
-			Player OtherPlayer = HitResult.collider.GetComponent<Player>();
-			if (OtherPlayer)
-				OtherPlayer.DamagePlayer();
+			if(HasThrowable)
+			{
+				if (!_currentThrowable)
+					return;
+				LaunchThrowable(_currentThrowable.GetComponent<Throwable>());
+			}
+			else
+			{
+				RaycastHit2D HitResult = Physics2D.Raycast(transform.position + (transform.right * (_myCollider.bounds.extents.x + 0.01f)), transform.right, _attackRange, 0x7FFFFFFF);
+				if (!HitResult)
+					return;
+				Player OtherPlayer = HitResult.collider.GetComponent<Player>();
+				if (OtherPlayer)
+					OtherPlayer.DamagePlayer();
+			}
 		}
 		private void OnTogglePauseMenu(InputAction.CallbackContext Context)
 		{
@@ -158,7 +174,39 @@ public class Player : MonoBehaviour
      ----------------------------------------------------------------
     */
 	public ECollectibles GetCurrentItems() { return _currentItems; }
-    public void TryAddItem(ECollectibles Item) { _currentItems |= Item; }
+    public void TryAddItem(ECollectibles Item) 
+	{
+		_currentItems |= Item;
+
+		switch (Item)
+		{
+			case ECollectibles.ThrowableKnife:
+				SpawnThrowable(ECollectibles.ThrowableKnife);
+				break;
+			case ECollectibles.ThrowableBomb:
+				SpawnThrowable(ECollectibles.ThrowableBomb);
+				break;
+		}
+	}
+	private void SpawnThrowable(ECollectibles Item)
+	{
+		if (HasThrowable)
+			return;
+		_currentThrowable = Instantiate(_throwablePrefab, _throwablesSpawnLocation.transform);
+		_currentThrowable.transform.localPosition = Vector3.zero;
+		_currentThrowable.GetComponent<Throwable>().Parent = gameObject;
+	}
+	private void LaunchThrowable(Throwable Object)
+	{
+		if (!Object)
+			return;
+
+		Rigidbody2D RB = Object.AddComponent<Rigidbody2D>();
+		RB.constraints = RigidbodyConstraints2D.FreezeRotation;
+		Object.transform.parent = null; // attach to scene root
+		RB.AddForce(((Vector2.up * 0.1f) + Vector2.right) * ((_currentDirection == EMovementDirection.Right) ? 1 : -1) * Object.GetThrowableLaunchForce());
+		HasThrowable = false;
+	}
 	#endregion
 
 	#region Unity Interface
