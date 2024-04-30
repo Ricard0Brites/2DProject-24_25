@@ -1390,7 +1390,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: Saves
+  m_Text: Saves (Disabled)
 --- !u!222 &864983014
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2034,7 +2034,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1291606746}
   m_OnClick:
     m_PersistentCalls:
@@ -3219,6 +3219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstLevelSceneIndex: 2
+  MainMenuSceneIndex: -1
   SavePanelContainer: {fileID: 1808836504}
   SaveButtonsContainer: {fileID: 1914336741}
 --- !u!1660057539 &9223372036854775807
