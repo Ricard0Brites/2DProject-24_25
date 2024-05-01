@@ -1423,7 +1423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe7f64909d4a96428414f8da68f9307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Item: 17
+  Item: 1
+  HasLifeCycle: 0
+  _lifeTime: 20
 --- !u!212 &672228911
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2383,7 +2385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe7f64909d4a96428414f8da68f9307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Item: 4096
+  Item: 256
+  HasLifeCycle: 0
+  _lifeTime: 20
 --- !u!212 &1194883084
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3132,7 +3136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe7f64909d4a96428414f8da68f9307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Item: 1
+  Item: 4096
+  HasLifeCycle: 0
+  _lifeTime: 20
 --- !u!212 &1776324353
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3673,7 +3679,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe7f64909d4a96428414f8da68f9307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Item: 256
+  Item: 16
+  HasLifeCycle: 0
+  _lifeTime: 20
 --- !u!212 &2043354046
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonsLogic : MonoBehaviour
 {
-    public int FirstLevelSceneIndex = -1;
+    public int FirstLevelSceneIndex = -1, DevLevelSceneIndex = -1;
     public int MainMenuSceneIndex = -1;
 
     public GameObject SavePanelContainer = null;
@@ -81,6 +81,11 @@ public class ButtonsLogic : MonoBehaviour
         Debug.Log("Starting New Game");
         if (FirstLevelSceneIndex > 0)
             SceneManager.LoadScene(FirstLevelSceneIndex); 
+    }
+    public void OpenDevLevel()
+    {
+        if (DevLevelSceneIndex >= 0)
+            SceneManager.LoadScene(DevLevelSceneIndex);
     }
     public void OpenSettings()
     {
