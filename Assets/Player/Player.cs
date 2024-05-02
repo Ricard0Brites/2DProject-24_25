@@ -141,7 +141,10 @@ public class Player : MonoBehaviour
 		private void OnTogglePauseMenu(InputAction.CallbackContext Context)
 		{
 			if (_pauseMenuContainer)
+			{
 				_pauseMenuContainer.SetActive(!_pauseMenuContainer.activeInHierarchy);
+				Time.timeScale = _pauseMenuContainer.activeInHierarchy ? 0 : 1;
+			}		
 		}
 		#endregion
 

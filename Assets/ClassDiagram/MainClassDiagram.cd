@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="NPC">
+    <Position X="0.5" Y="4.358" Height="0.287" Width="2.323" />
+  </Comment>
+  <Comment CommentText="UI">
+    <Position X="0.542" Y="7.085" Height="0.287" Width="3.459" />
+  </Comment>
+  <Comment CommentText="Level Dynamics">
+    <Position X="6.297" Y="0.683" Height="0.287" Width="5.193" />
+  </Comment>
+  <Comment CommentText="Save System&#xD;&#xA;">
+    <Position X="0.5" Y="0.768" Height="0.287" Width="3.288" />
+  </Comment>
+  <Comment CommentText="Items&#xD;&#xA;">
+    <Position X="6.28" Y="4.25" Height="0.287" Width="3.178" />
+  </Comment>
+  <Comment CommentText="Player&#xD;&#xA;">
+    <Position X="6.267" Y="7.14" Height="0.287" Width="2.066" />
+  </Comment>
+  <Class Name="Collectible" Collapsed="true">
+    <Position X="6.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAACAEAEAAAAAAAAAiAAAAAAQ=</HashCode>
+      <FileName>Assets\Collectibles\Collectible.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCollisionModule" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAgAABAAAA=</HashCode>
+      <FileName>Assets\Enemies\PlayerCollisionModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LateralMovement" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAKAAAAAAAAEAAABAAAAAAAAAADAoAAAAAAA=</HashCode>
+      <FileName>Assets\Enemies\LateralMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemSpawner" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAIACAAAIAAAAAAAAAAAAAAAAAAAAAAAAEAACA=</HashCode>
+      <FileName>Assets\ItemSpawner\ItemSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelFinish" Collapsed="true">
+    <Position X="14" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\LevelFinish\LevelFinish.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuInput" Collapsed="true">
+    <Position X="2.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Main Menu\Scripts\MenuInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextFade" Collapsed="true">
+    <Position X="2.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Main Menu\Scripts\TextFade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FallingPlatform" Collapsed="true">
+    <Position X="6.25" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAIAiAAgAAAAAAAAAAAAAgAAgAAgAAgCAAgAAA=</HashCode>
+      <FileName>Assets\Platforms\Falling Platform\FallingPlatform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SlidingPlatform" Collapsed="true">
+    <Position X="9.25" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAAAACACBiAAAAAQAAEAAEAAAgIAAAAAAAggEIBAAAA=</HashCode>
+      <FileName>Assets\Platforms\Sliding Platform\SlidingPlatform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlatformToggleButton" Collapsed="true">
+    <Position X="9.25" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Platforms\Toggle Button\PlatformToggleButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="6.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASARAgAMiEwIISNAAAIIcFAIAgkEAgIgCAAQDAQCGA=</HashCode>
+      <FileName>Assets\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveButton" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\SaveSystem\SaveButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveSystem" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAACAAIAAAAACAAAwAIE=</HashCode>
+      <FileName>Assets\SaveSystem\SaveSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spike" Collapsed="true">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAACAAAACABAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Spikes\Spike.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpikePlayerDetectionModule" Collapsed="true">
+    <Position X="6.25" Y="2" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgBCAQAAgAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Spikes\SpikePlayerDetectionModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Throwable" Collapsed="true">
+    <Position X="6.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAQAEAAEAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Throwables\Throwable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealthUIManager" Collapsed="true">
+    <Position X="0.5" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAIAAAAAAAAAAACAAIAAAAAACAEEA=</HashCode>
+      <FileName>Assets\UI\HealthUIManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ButtonsLogic" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CASAAgAACGAgAAEAACAgAAEAAABEQAASAAAABAgEgQQ=</HashCode>
+      <FileName>Assets\UI\ButtonsLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SaveData" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAIAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\SaveSystem\SaveSystem.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SaveFileData" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\SaveSystem\SaveSystem.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="ECollectibles" Collapsed="true">
+    <Position X="8" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAQAAIAAAAAAAEgAABAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Collectibles\CollectibleObjects.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EMovementDirection" Collapsed="true">
+    <Position X="6.25" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAACA=</HashCode>
+      <FileName>Assets\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="MonoLisa-Regular" Size="9.75" />
+</ClassDiagram>

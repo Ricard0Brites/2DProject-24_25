@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 // Maximum of 31 items and 1 Unassigned
 [Flags]
