@@ -171,7 +171,6 @@ public class Player : MonoBehaviour
 		OnPlayerTakeDamageDelegate.Invoke(_isSecondaryPlayer);
 		if(--_health <= 0)
 		{
-			//Temp
 			SceneManager.LoadScene(0);
 			Destroy(gameObject);
 		}
