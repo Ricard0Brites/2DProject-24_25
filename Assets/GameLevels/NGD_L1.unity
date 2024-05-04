@@ -123,6 +123,110 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &11936487
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 631689044552336154, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: _maxMovementSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 631689044552336154, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: _timePlatformFallsFor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 631689044552336154, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: _timeUntilPlatformFalls
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013870278793477532, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      propertyPath: m_Name
+      value: Falling Platform (Skill Advantage) (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6013870278793477532, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 11936489}
+  m_SourcePrefab: {fileID: 100100000, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+--- !u!1 &11936488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6013870278793477532, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
+  m_PrefabInstance: {fileID: 11936487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &11936489
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11936488}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 05dbe95dc075db14c9bccfdeaf9df8ed, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1001 &33310155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -944,6 +1048,10 @@ PrefabInstance:
       value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
+      propertyPath: _movementSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
       propertyPath: _pauseMenuContainer
       value: 
       objectReference: {fileID: 1208161015}
@@ -1412,6 +1520,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2099073700948214055, guid: 77d7baac17ac0ed449798426b28427c7, type: 3}
+      propertyPath: _movementSpeed
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2565994382255838060, guid: 77d7baac17ac0ed449798426b28427c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.56979
@@ -1841,67 +1953,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 973ff3aac5307324e87c762125a781ad, type: 3}
---- !u!1001 &1915827123
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179229191772834019, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013870278793477532, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_Name
-      value: Falling Platform (Skill Advantage) (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013870278793477532, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3b24cda2c61456946b837424ff10c794, type: 3}
 --- !u!1001 &1934056629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2501,7 +2552,7 @@ SceneRoots:
   - {fileID: 1956450774}
   - {fileID: 1668479705}
   - {fileID: 5022672123234843123}
-  - {fileID: 1915827123}
+  - {fileID: 11936487}
   - {fileID: 1538061886}
   - {fileID: 7558201722906257196}
   - {fileID: 1631792926}

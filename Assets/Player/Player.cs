@@ -139,7 +139,10 @@ public class Player : MonoBehaviour
 					return;
 				Player OtherPlayer = HitResult.collider.GetComponent<Player>();
 				if (OtherPlayer)
+				{
 					OtherPlayer.DamagePlayer();
+					OtherPlayer.TriggerPlayerDamageReaction(OtherPlayer.transform.position - transform.position);
+				}
 				StartCoroutine(ToggleCanAttack());
 			}
 		}
@@ -168,6 +171,9 @@ public class Player : MonoBehaviour
 		OnPlayerTakeDamageDelegate.Invoke(_isSecondaryPlayer);
 		if(--_health <= 0)
 		{
+			//Temp
+			if (_isSecondaryPlayer)
+				SceneManager.LoadScene(0);
 			Destroy(gameObject);
 		}
 	}
