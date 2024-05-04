@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +19,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private int _health = 5;
 	[SerializeField] private float _damageForce = 200.0f;
 	[SerializeField] private bool _isSecondaryPlayer = false;
-	[SerializeField] private float _attackRange = 1.0f;
+	[SerializeField] private float _attackRange = 1.0f, _attackCooldown = 0.5f;
 	[SerializeField] private GameObject _pauseMenuContainer;
 	[SerializeField] private float _killY = -50;
 	[SerializeField] private GameObject _throwablePrefab = null, _throwablesSpawnLocation = null;
@@ -32,12 +33,12 @@ public class Player : MonoBehaviour
     private PlayerInputAction1 _secondaryPlayerControls;
 	private InputAction _move, _attack, _jump, _togglePauseMenu;
 	private Vector2 _moveDirection;
-	private bool _canJump = true;
+	private bool _canJump = true, _canAttack = true;
 	private ECollectibles _currentItems = 0;
 	private GameObject _currentThrowable = null;
 	private EMovementDirection _currentDirection;
 	
-	public bool HasThrowable = false;
+	[DoNotSerialize] public bool HasThrowable = false;
 
 	public delegate void OnPlayerTakeDamage(bool IsSecondaryPlayer);
 	public event OnPlayerTakeDamage OnPlayerTakeDamageDelegate;
@@ -130,12 +131,16 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
+				if (!_canAttack)
+					return;
+				_canAttack = false;
 				RaycastHit2D HitResult = Physics2D.Raycast(transform.position + (transform.right * (_myCollider.bounds.extents.x + 0.01f)), transform.right, _attackRange, 0x7FFFFFFF);
 				if (!HitResult)
 					return;
 				Player OtherPlayer = HitResult.collider.GetComponent<Player>();
 				if (OtherPlayer)
 					OtherPlayer.DamagePlayer();
+				StartCoroutine(ToggleCanAttack());
 			}
 		}
 		private void OnTogglePauseMenu(InputAction.CallbackContext Context)
@@ -147,6 +152,11 @@ public class Player : MonoBehaviour
 			}		
 		}
 		#endregion
+
+		private IEnumerator ToggleCanAttack()
+		{
+			yield return new WaitForSeconds(_attackCooldown);
+		}
 
 	#endregion
 

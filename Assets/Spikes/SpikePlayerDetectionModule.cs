@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpikePlayerDetectionModule : MonoBehaviour
 {
-    [SerializeField] private int _detectionRange = 100;
+    [SerializeField] private int _detectionRange = 500;
     [SerializeField] private float _timeUntilTheSpikeDestoysAfterActivation = 2.0f;
     private Collider2D _myCollider = null;
     private Rigidbody2D _myRigidBody = null;
@@ -30,7 +30,7 @@ public class SpikePlayerDetectionModule : MonoBehaviour
 	{
         if (!_myCollider)
             return;
-		RaycastHit2D[] HitResults = Physics2D.RaycastAll(transform.position, transform.up, _detectionRange);
+		RaycastHit2D[] HitResults = Physics2D.RaycastAll(transform.position, transform.up, _detectionRange / 100);
 		if (HitResults.Length <= 0)
 			return;
 
