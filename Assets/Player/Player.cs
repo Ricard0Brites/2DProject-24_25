@@ -156,6 +156,7 @@ public class Player : MonoBehaviour
 		private IEnumerator ToggleCanAttack()
 		{
 			yield return new WaitForSeconds(_attackCooldown);
+			_canAttack = true;
 		}
 
 	#endregion

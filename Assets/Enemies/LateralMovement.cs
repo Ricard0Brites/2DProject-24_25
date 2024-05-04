@@ -6,7 +6,7 @@ public class LateralMovement : MonoBehaviour
 	[SerializeField]
 	private float _movementSpeed = 5.0f;
 	[SerializeField]
-	private string _WallTag = "Barrier";
+	private string _wallTag = "Barrier";
 
 	private bool _canMove = true;
 	private bool _direction = true;
@@ -34,7 +34,7 @@ public class LateralMovement : MonoBehaviour
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if(collision.gameObject.CompareTag(_WallTag))
+		if(collision.gameObject.CompareTag(_wallTag))
 		{
 			ToggleMovementDirection();
 		}

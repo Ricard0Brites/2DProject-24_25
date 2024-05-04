@@ -86,11 +86,13 @@ MonoBehaviour:
   _health: 5
   _damageForce: 800
   _isSecondaryPlayer: 1
-  _attackRange: 0
+  _attackRange: 5
+  _attackCooldown: 0.5
   _pauseMenuContainer: {fileID: 0}
   _killY: -20
   _throwablePrefab: {fileID: 8558567906748005193, guid: 3742426da884d7d49908fb1f00c815c5, type: 3}
   _throwablesSpawnLocation: {fileID: 2305802975680070506}
+  HasThrowable: 0
 --- !u!50 &2075617122846259328
 Rigidbody2D:
   serializedVersion: 4
