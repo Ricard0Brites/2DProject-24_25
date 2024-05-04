@@ -168,7 +168,6 @@ public class Player : MonoBehaviour
 		if(--_health <= 0)
 		{
 			Destroy(gameObject);
-			//TODO: Trigger some level finish here or something
 		}
 	}
 	public void TriggerPlayerDamageReaction(Vector2 Direction)

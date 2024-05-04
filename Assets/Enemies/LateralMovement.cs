@@ -28,7 +28,7 @@ public class LateralMovement : MonoBehaviour
 		if(_rB)
 			_rB.velocity = new Vector2((_movementSpeed * (_direction ? 1 : -1)), _rB.velocity.y);
 	}
-	private void Update()
+	private void FixedUpdate()
 	{
 		Move();
 	}
