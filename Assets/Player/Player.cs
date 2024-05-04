@@ -172,8 +172,7 @@ public class Player : MonoBehaviour
 		if(--_health <= 0)
 		{
 			//Temp
-			if (_isSecondaryPlayer)
-				SceneManager.LoadScene(0);
+			SceneManager.LoadScene(0);
 			Destroy(gameObject);
 		}
 	}
