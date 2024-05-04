@@ -102,7 +102,7 @@ public class ButtonsLogic : MonoBehaviour
         if (ElementToHide)
             ElementToHide.SetActive(false);
 
-		Time.timeScale = 1;
+		Time.timeScale = 1; 
 	}
     public void ChangeWindowMode(int NewWindowMode)
     {
