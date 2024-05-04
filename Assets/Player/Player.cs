@@ -231,6 +231,7 @@ public class Player : MonoBehaviour
 	{
 		_playerControls = new PlayerInputAction();
 		_secondaryPlayerControls = new PlayerInputAction1();
+		Time.timeScale = 1;
 	}
 	private void Start()
     {
