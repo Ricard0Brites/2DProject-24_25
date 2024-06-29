@@ -11,6 +11,7 @@ public class ButtonsLogic : MonoBehaviour
     public GameObject SavePanelContainer = null;
     public GameObject SaveButtonsContainer = null;
     public GameObject SettingsContainer = null;
+    public GameObject ControlsContainer = null;
     public Slider VolumeSlider = null;
     public Dropdown GraphicQuality = null;
     public Dropdown WindowMode = null;
@@ -117,4 +118,14 @@ public class ButtonsLogic : MonoBehaviour
         if(Mixer)
             Mixer.SetFloat("MasterVolume", NewVolume);
     }
+    public void ShowControls()
+    {
+        if(ControlsContainer)
+            ControlsContainer.SetActive(true);
+    }
+    public void HideControls()
+    {
+        if(ControlsContainer)
+            ControlsContainer.SetActive(false);
+	}
 }
