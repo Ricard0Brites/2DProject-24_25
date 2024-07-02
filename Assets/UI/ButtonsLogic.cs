@@ -12,6 +12,7 @@ public class ButtonsLogic : MonoBehaviour
     public GameObject SaveButtonsContainer = null;
     public GameObject SettingsContainer = null;
     public GameObject ControlsContainer = null;
+    public GameObject DevLevelButton = null;
     public Slider VolumeSlider = null;
     public Dropdown GraphicQuality = null;
     public Dropdown WindowMode = null;
@@ -57,6 +58,11 @@ public class ButtonsLogic : MonoBehaviour
                 }
             }
         }
+
+		if (DevLevelButton && !Debug.isDebugBuild)
+        {
+            Destroy(DevLevelButton);
+        }
 	}
 	public void Quit()
     {
@@ -84,7 +90,7 @@ public class ButtonsLogic : MonoBehaviour
     }
     public void OpenDevLevel()
     {
-        if (DevLevelSceneIndex >= 0)
+        if (DevLevelSceneIndex >= 0 && Debug.isDebugBuild)
             SceneManager.LoadScene(DevLevelSceneIndex);
     }
     public void OpenSettings()
