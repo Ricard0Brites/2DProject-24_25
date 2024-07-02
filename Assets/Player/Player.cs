@@ -136,7 +136,10 @@ public class Player : MonoBehaviour
 				_canAttack = false;
 				RaycastHit2D HitResult = Physics2D.Raycast(transform.position + (transform.right * (_myCollider.bounds.extents.x + 0.01f)), transform.right, _attackRange, 0x7FFFFFFF);
 				if (!HitResult)
+				{
+					_canAttack = true;
 					return;
+				}
 				Player OtherPlayer = HitResult.collider.GetComponent<Player>();
 				if (OtherPlayer)
 				{
@@ -144,8 +147,9 @@ public class Player : MonoBehaviour
 					OtherPlayer.TriggerPlayerDamageReaction(OtherPlayer.transform.position - transform.position);
 				}
 				StartCoroutine(ToggleCanAttack());
-			}
+
 		}
+	}
 		private void OnTogglePauseMenu(InputAction.CallbackContext Context)
 		{
 			if (_pauseMenuContainer)

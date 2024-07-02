@@ -79,7 +79,6 @@ public class ButtonsLogic : MonoBehaviour
     }
     public void StartNewGame()
     {
-        Debug.Log("Starting New Game");
         if (FirstLevelSceneIndex > 0)
             SceneManager.LoadScene(FirstLevelSceneIndex); 
     }
