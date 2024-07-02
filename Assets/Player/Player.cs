@@ -176,7 +176,6 @@ public class Player : MonoBehaviour
 		if(--_health <= 0)
 		{
 			SceneManager.LoadScene(0);
-			Destroy(gameObject);
 		}
 	}
 	public void TriggerPlayerDamageReaction(Vector2 Direction)

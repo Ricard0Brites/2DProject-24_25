@@ -767,7 +767,7 @@ MonoBehaviour:
     D - Move Right
 
     F
-    - Throw Item'
+    - Throw Item/Attack'
 --- !u!222 &172122374
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3830,7 +3830,7 @@ MonoBehaviour:
     L - Move Right
 
     H
-    - Throw Item'
+    - Throw Item/Attack'
 --- !u!222 &1004219965
 CanvasRenderer:
   m_ObjectHideFlags: 0
