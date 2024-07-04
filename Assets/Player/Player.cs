@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 	private ECollectibles _currentItems = 0;
 	private GameObject _currentThrowable = null;
 	private EMovementDirection _currentDirection;
+	private Animator _myAnimator = null;
 	
 	[DoNotSerialize] public bool HasThrowable = false;
 
@@ -134,20 +135,9 @@ public class Player : MonoBehaviour
 				if (!_canAttack)
 					return;
 				_canAttack = false;
-				RaycastHit2D HitResult = Physics2D.Raycast(transform.position + (transform.right * (_myCollider.bounds.extents.x + 0.01f)), transform.right, _attackRange, 0x7FFFFFFF);
-				if (!HitResult)
-				{
-					_canAttack = true;
-					return;
-				}
-				Player OtherPlayer = HitResult.collider.GetComponent<Player>();
-				if (OtherPlayer)
-				{
-					OtherPlayer.DamagePlayer();
-					OtherPlayer.TriggerPlayerDamageReaction(OtherPlayer.transform.position - transform.position);
-				}
-				StartCoroutine(ToggleCanAttack());
 
+				_myAnimator.SetBool("IsAttacking", true);
+				StartCoroutine(ToggleCanAttack());
 		}
 	}
 		private void OnTogglePauseMenu(InputAction.CallbackContext Context)
@@ -163,7 +153,26 @@ public class Player : MonoBehaviour
 		private IEnumerator ToggleCanAttack()
 		{
 			yield return new WaitForSeconds(_attackCooldown);
+
+			RaycastHit2D HitResult = Physics2D.Raycast(transform.position + (transform.right * (_myCollider.bounds.extents.x + 0.01f)), transform.right, _attackRange, 0x7FFFFFFF);
+			if (!HitResult)
+			{
+				_canAttack = true;
+			}
+			else
+			{
+				Player OtherPlayer = HitResult.collider.GetComponent<Player>();
+				if (OtherPlayer)
+				{
+					OtherPlayer.DamagePlayer();
+					OtherPlayer.TriggerPlayerDamageReaction(OtherPlayer.transform.position - transform.position);
+				}
+			}
+
 			_canAttack = true;
+		
+				if(_myAnimator)
+					_myAnimator.SetBool("IsAttacking", false);
 		}
 
 	#endregion
@@ -242,7 +251,7 @@ public class Player : MonoBehaviour
         _playerObject = gameObject;
         _rB = GetComponent<Rigidbody2D>();
 		_myCollider = GetComponent<CapsuleCollider2D>();
-
+		_myAnimator = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -250,6 +259,13 @@ public class Player : MonoBehaviour
 
 		if (transform.position.y < _killY)
 			SceneManager.LoadScene(0);
+
+		if(_myAnimator)
+		{
+			_myAnimator.SetBool("IsJumping", !_canJump);
+
+			_myAnimator.SetBool("IsWalking", (Mathf.Abs(_rB.velocity.x) > 0.01));
+		}
     }
     private void FixedUpdate()
     {
