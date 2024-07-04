@@ -16,13 +16,13 @@ public class Spike : MonoBehaviour
 			{
 				if(!PlayerReference.IsInsideSpikes)
 				{
-					if(IsFallingSpike)
-					{
-						Collider2D ColliderComponent = GetComponent<Collider2D>();
-						ColliderComponent.isTrigger = false;
-					}
 					PlayerReference.IsInsideSpikes = true;
 					PlayerReference.DamagePlayer();
+
+					if (IsFallingSpike)
+					{
+						Destroy(this);
+					}
 				}
 			}
 		}
