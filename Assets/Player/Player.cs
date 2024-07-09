@@ -262,8 +262,6 @@ public class Player : MonoBehaviour
 
 		if(_myAnimator)
 		{
-			_myAnimator.SetBool("IsJumping", !_canJump);
-
 			_myAnimator.SetBool("IsWalking", (Mathf.Abs(_rB.velocity.x) > 0.01));
 		}
     }
