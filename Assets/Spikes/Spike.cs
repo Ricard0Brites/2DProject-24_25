@@ -34,7 +34,8 @@ public class Spike : MonoBehaviour
 			Player PlayerReference = collision.GetComponent<Player>();
 			if (PlayerReference)
 			{
-				StartCoroutine(ResetState(PlayerReference));
+				if(this) //avoids trying to start coroutine when level is unloaded
+					StartCoroutine(ResetState(PlayerReference));
 			}
 		}
 	}
