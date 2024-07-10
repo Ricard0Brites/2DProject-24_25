@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 19225103511062979}
   - component: {fileID: 6519770924594577555}
   - component: {fileID: 8894103332528193380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collectible
   m_TagString: Collectible
   m_Icon: {fileID: 0}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Item: 0
-  _isCollectible: 1
+  HasLifeCycle: 0
+  _lifeTime: 20
 --- !u!50 &6519770924594577555
 Rigidbody2D:
   serializedVersion: 4

@@ -14,20 +14,6 @@ public class Collectible : MonoBehaviour
 			StartCoroutine(InitiateLifeCycle());
 		}
 	}
-
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.CompareTag("Player"))
-		{
-			Player PlayerReference = collision.GetComponent<Player>();
-			if (PlayerReference)
-			{
-				PlayerReference.TryAddItem(Item);
-				if(gameObject) 
-					Destroy(gameObject);
-			}
-		}
-	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (collision.collider.CompareTag("Player"))
@@ -35,8 +21,8 @@ public class Collectible : MonoBehaviour
 			Player PlayerReference = collision.collider.GetComponent<Player>();
 			if (PlayerReference && !PlayerReference.HasThrowable)
 			{
+				PlayerReference.SetCollectibleCollisionLayer(1 << gameObject.layer);
 				PlayerReference.TryAddItem(Item);
-				PlayerReference.HasThrowable = true;
 				if (gameObject)
 					Destroy(gameObject);
 			}

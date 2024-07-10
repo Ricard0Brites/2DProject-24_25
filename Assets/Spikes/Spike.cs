@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spike : MonoBehaviour
 {
@@ -34,7 +35,8 @@ public class Spike : MonoBehaviour
 			Player PlayerReference = collision.GetComponent<Player>();
 			if (PlayerReference)
 			{
-				StartCoroutine(ResetState(PlayerReference));
+				if(this && SceneManager.GetActiveScene().isLoaded) //avoids trying to start coroutine when level is unloaded
+					StartCoroutine(ResetState(PlayerReference));
 			}
 		}
 	}
