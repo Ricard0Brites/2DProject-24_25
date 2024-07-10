@@ -2361,7 +2361,7 @@ MonoBehaviour:
 
     D - Move Right
 
-    F - Attack'
+    F - Attack/Throw Object'
 --- !u!222 &1813373468
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2446,7 +2446,7 @@ MonoBehaviour:
 
     L - Move Right
 
-    H - Attack'
+    H - Attack/Throw Object'
 --- !u!222 &1825702952
 CanvasRenderer:
   m_ObjectHideFlags: 0
