@@ -36,28 +36,6 @@ public class ButtonsLogic : MonoBehaviour
     		if (VolumeSlider)
                 VolumeSlider.SetValueWithoutNotify(CurrentVolume);
         }
-        //Assign Found Saves to the buttons
-        if(SaveButtonsContainer)
-        {
-            Text[] SaveButtonsTextComponent = SaveButtonsContainer.GetComponentsInChildren<Text>();
-            SaveButton[] SaveButtonsComponent = SaveButtonsContainer.GetComponentsInChildren<SaveButton>();
-            int NumberOfSavesFound = SaveSystem.GetNumberOfSaves(), Index = 0;
-            SaveFileData[] SaveDataFound = SaveSystem.GetAllSavesInfo();
-
-		    if (NumberOfSavesFound > 0 && NumberOfSavesFound < 5)
-            {
-                foreach(Text TextComponent in SaveButtonsTextComponent)
-                {
-                    TextComponent.text = SaveDataFound[Index].CreationDateTime.ToString();
-
-                    SaveButtonsComponent[Index].SaveIndex = Index;
-
-                    Index++;
-                    if (--NumberOfSavesFound <= 0)
-                        break;
-                }
-            }
-        }
 
 		if (DevLevelButton && !Debug.isDebugBuild)
         {

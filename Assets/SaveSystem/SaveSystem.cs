@@ -1,13 +1,14 @@
 using System;
 using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-struct SaveData
+public struct SaveData
 {
-    public int PlayerHP; // int because its simpler to work on a life count basis (also lighter if we need to compare values due to lack of floating values that arent 100% accurate)
-    public ECollectibles ItemsCollected;
-    public Scene CurrentScene; //Level in which the player is located
+    public SaveData(bool InHasSeenTutorial)
+    {
+        HasSeenTutorial = InHasSeenTutorial;
+    }
+    public bool HasSeenTutorial;
 }
 public struct SaveFileData
 {
@@ -26,61 +27,41 @@ public class SaveSystem : MonoBehaviour
             return dir.GetFiles().Length / 2;
         }
         return 0;
-        
     }
     private static int GetSaveToOverride()
     {
         return SaveToOverride >= 0 ? SaveToOverride : Mathf.Min(Mathf.Max(GetNumberOfSaves() - 1, 0), 10);
     }
-    public static bool SaveProgress(Player InPlayer)
+    public static bool Save(bool HasSeenTutorial)
     {
-        //Data
-        Scene CurrentScene = SceneManager.GetActiveScene();
-        
-        SaveData Data = new SaveData();
-        Data.PlayerHP = InPlayer.GetHealth();
-        Data.ItemsCollected = InPlayer.GetCurrentItems();
-        Data.CurrentScene = CurrentScene;
+        //Data        
+        SaveData Data = new SaveData(HasSeenTutorial);
 
         string SavePath = SavesLocation + GetSaveToOverride() + ".json";
 
-        //Try to Creade directory
+        //Try to Create directory
         if (!Directory.CreateDirectory(SavesLocation).Exists)
             return false;
 
         //Save to file
-        string PlayerDataToSave = JsonUtility.ToJson(Data);
-        File.WriteAllText(SavePath, PlayerDataToSave);
+        string DataToSave = JsonUtility.ToJson(Data);
+        File.WriteAllText(SavePath, DataToSave);
 
         return true;
     }
-    public static bool LoadGame(int SaveIndexToLoad)
+    public static SaveData GetSavedValues(int SaveIndex)
     {
-        string FilePath = SavesLocation + SaveIndexToLoad + ".json";
-        if (File.Exists(FilePath))
-        {
-            string JSON = File.ReadAllText(FilePath);
-            SaveData SaveInfo = JsonUtility.FromJson<SaveData>(JSON);
+        SaveData ReturnObject = new SaveData();
+		SaveFileData[] Files = GetAllSavesInfo();
 
-            // TODO If GD comes back
-            // load scene 
-            // set character hp
-            // set character items collected
-            // Remove Collected Items from the scene
-            return true;
-        }
-        return false;
-    }
-    public static bool DeleteSaveFile(int SaveIndexToLoad)
-    {
-        string FilePath = SavesLocation + SaveIndexToLoad + ".json";
-        if (File.Exists(FilePath))
-        {
-            File.Delete(FilePath);
-            return true;
-        }
-        return false;
-    }
+		if (Files.Length >= 0 && SaveIndex >= 0 && SaveIndex <= Files.Length - 1)
+		{
+			StreamReader File = new StreamReader(SavesLocation + Files[SaveIndex].FileName);
+            String Data = File.ReadToEnd();
+            ReturnObject = JsonUtility.FromJson<SaveData>(Data);
+		}
+		return ReturnObject;
+	}
     public static SaveFileData[] GetAllSavesInfo()
     {
         SaveFileData[] ListToReturn = null;
