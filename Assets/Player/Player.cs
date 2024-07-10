@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
 
 	[NonSerialized] public bool IsInsideSpikes = false;
 
-	private GameObject _playerObject = null;
     private Rigidbody2D _rB = null;
 	private CapsuleCollider2D _myCollider = null;
     private PlayerInputAction _playerControls;
@@ -38,8 +37,9 @@ public class Player : MonoBehaviour
 	private GameObject _currentThrowable = null;
 	private EMovementDirection _currentDirection;
 	private Animator _myAnimator = null;
+	private int _collectibleCollisionLayer = -1;
 	
-	[DoNotSerialize] public bool HasThrowable = false;
+	public bool HasThrowable = false;
 
 	public delegate void OnPlayerTakeDamage(bool IsSecondaryPlayer);
 	public event OnPlayerTakeDamage OnPlayerTakeDamageDelegate;
@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
 				if (!_currentThrowable)
 					return;
 				LaunchThrowable(_currentThrowable.GetComponent<Throwable>());
+				EnableCoolectibleCollision();
 			}
 			else
 			{
@@ -206,7 +207,6 @@ public class Player : MonoBehaviour
     public void TryAddItem(ECollectibles Item) 
 	{
 		_currentItems |= Item;
-
 		switch (Item)
 		{
 			case ECollectibles.ThrowableKnife:
@@ -216,8 +216,11 @@ public class Player : MonoBehaviour
 				SpawnThrowable(ECollectibles.ThrowableBomb);
 				break;
 		}
+		HasThrowable = true;
+		DisableCollectibleCollision();
 	}
-	private void SpawnThrowable(ECollectibles Item)
+	public void SetCollectibleCollisionLayer(int Layer) { _collectibleCollisionLayer = Layer;}
+	private void SpawnThrowable(ECollectibles Item) // item not used due to the missing sprites
 	{
 		if (HasThrowable)
 			return;
@@ -236,6 +239,18 @@ public class Player : MonoBehaviour
 		RB.AddForce(((Vector2.up * 0.1f) + Vector2.right) * ((_currentDirection == EMovementDirection.Right) ? 1 : -1) * Object.GetThrowableLaunchForce());
 		HasThrowable = false;
 	}
+	private void DisableCollectibleCollision()
+	{
+		//Exclude Layer will get only the specific bit toggled on
+
+		_myCollider.excludeLayers |= _collectibleCollisionLayer;
+	}
+	private void EnableCoolectibleCollision()
+	{
+		//Exclude Layer will get only the specific bit toggled off
+
+		_myCollider.excludeLayers &= ~_collectibleCollisionLayer;
+	}
 	#endregion
 
 	#region Unity Interface
@@ -247,8 +262,6 @@ public class Player : MonoBehaviour
 	}
 	private void Start()
     {
-		//SaveSystem.SaveProgress(this);
-        _playerObject = gameObject;
         _rB = GetComponent<Rigidbody2D>();
 		_myCollider = GetComponent<CapsuleCollider2D>();
 		_myAnimator = GetComponent<Animator>();
