@@ -7,7 +7,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] List<GameObject> TutorialUI;
     [SerializeField] float ShowTutorialForSeconds = 25;
 
-    void Awake()
+    void Start()
     {
         //if there are no saves
         if(!(SaveSystem.GetNumberOfSaves() > 0))

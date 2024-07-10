@@ -1712,6 +1712,10 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 2800000, guid: 9c412f5e1c9c1e546ab323578a615511, type: 3}
+    - target: {fileID: 3376773991075832140, guid: 2b6ee437c76000b43984fca5cc608e58, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 3ba943b0619a7d4459b8953a287934e6, type: 3}
     - target: {fileID: 5413472881238187383, guid: 2b6ee437c76000b43984fca5cc608e58, type: 3}
       propertyPath: _playerOneReference
       value: 
@@ -1816,6 +1820,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9103289353985790881, guid: 2b6ee437c76000b43984fca5cc608e58, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 3ba943b0619a7d4459b8953a287934e6, type: 3}
     m_RemovedComponents:
     - {fileID: 4673192874345024945, guid: 2b6ee437c76000b43984fca5cc608e58, type: 3}
     m_RemovedGameObjects: []
