@@ -1280,33 +1280,13 @@ PrefabInstance:
       value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
-      propertyPath: _jumpSound.Volume
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
       propertyPath: _stabSound.Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
-      propertyPath: _throwSound.Volume
-      value: 0.1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
       propertyPath: _pauseMenuContainer
       value: 
       objectReference: {fileID: 1208161015}
-    - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
-      propertyPath: _jumpSound.SoundToPlay
-      value: 
-      objectReference: {fileID: 8300000, guid: a0ddc91e5d12e454690247c089329f9f, type: 3}
-    - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
-      propertyPath: _stabSound.SoundToPlay
-      value: 
-      objectReference: {fileID: 8300000, guid: 553374b2dfb4a4a4d9aac7e23d99acd1, type: 3}
-    - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
-      propertyPath: _throwSound.SoundToPlay
-      value: 
-      objectReference: {fileID: 8300000, guid: 9d4dda3fc05de5747b2fb98937405043, type: 3}
     - target: {fileID: 2565994382255838060, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25
