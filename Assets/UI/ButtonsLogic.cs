@@ -13,6 +13,8 @@ public class ButtonsLogic : MonoBehaviour
     public GameObject SettingsContainer = null;
     public GameObject ControlsContainer = null;
     public GameObject DevLevelButton = null;
+    public GameObject GameOverContainer = null;
+    public Text ScoreTextComponent = null;
     public Slider VolumeSlider = null;
     public Dropdown GraphicQuality = null;
     public Dropdown WindowMode = null;
@@ -41,6 +43,15 @@ public class ButtonsLogic : MonoBehaviour
         {
             Destroy(DevLevelButton);
         }
+
+        if(ScoreTextComponent)
+            MatchManager.ScoreText = ScoreTextComponent;
+
+		if (GameOverContainer)
+		{
+		    GameOverContainer.SetActive(false);
+		    MatchManager.GameOverContainer = GameOverContainer;
+		}
 	}
 	public void Quit()
     {
@@ -80,6 +91,10 @@ public class ButtonsLogic : MonoBehaviour
     {
 		if (MainMenuSceneIndex >= 0)
 			SceneManager.LoadScene(MainMenuSceneIndex);
+
+		Time.timeScale = 0;
+
+        ScoreKeeper.Get().ResetScores();
 	}
     public void Resume(GameObject ElementToHide)
     {
@@ -110,5 +125,10 @@ public class ButtonsLogic : MonoBehaviour
     {
         if(ControlsContainer)
             ControlsContainer.SetActive(false);
+	}
+    public void RestartLevel()
+    {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
 	}
 }

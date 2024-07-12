@@ -12,6 +12,11 @@ public enum EMovementDirection
     Left
 }
 
+[Serializable] public struct AudioMap
+{
+	public AudioClip SoundToPlay;
+	public float Volume;
+}
 public class Player : MonoBehaviour
 {
 	[SerializeField] private float _movementSpeed = 1.0f;
@@ -23,6 +28,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private GameObject _pauseMenuContainer;
 	[SerializeField] private float _killY = -50;
 	[SerializeField] private GameObject _throwablePrefab = null, _throwablesSpawnLocation = null;
+	[SerializeField] private AudioMap _stabSound, _throwSound, _jumpSound;
 
 	[NonSerialized] public bool IsInsideSpikes = false;
 
@@ -31,6 +37,7 @@ public class Player : MonoBehaviour
     private PlayerInputAction _playerControls;
     private PlayerInputAction1 _secondaryPlayerControls;
 	private InputAction _move, _attack, _jump, _togglePauseMenu;
+	private AudioSource _myAudioComponent = null;
 	private Vector2 _moveDirection;
 	private bool _canJump = true, _canAttack = true;
 	private ECollectibles _currentItems = 0;
@@ -45,13 +52,10 @@ public class Player : MonoBehaviour
 	public event OnPlayerTakeDamage OnPlayerTakeDamageDelegate;
 
 	#region Input
-
-		#region Input Management
 		private void ProcessInput()
         {
 		    _moveDirection = _move.ReadValue<Vector2>();
 	    }
-		#endregion
 
 		#region Input Actions       
 		private void BindActions()
@@ -115,20 +119,22 @@ public class Player : MonoBehaviour
 	    {
             if (!_rB)
                 return;
-
-		    _canJump = Mathf.Abs(_rB.velocity.y) < 0.0001f;
-		    if (!_canJump)
-			    return;
-		    if (_rB)
-			    _rB.AddForce(new Vector2(0.0f, _jumpForce));
-	    }
+			if (!_canJump)
+				return;
+			_rB.AddForce(new Vector2(0.0f, _jumpForce));
+			PlaySound(_jumpSound);
+		}
 		private void OnAttack(InputAction.CallbackContext Context)
 		{
 			if(HasThrowable)
 			{
 				if (!_currentThrowable)
+				{
+					HasThrowable = false;
 					return;
+				}
 				LaunchThrowable(_currentThrowable.GetComponent<Throwable>());
+				PlaySound(_throwSound);
 				EnableCoolectibleCollision();
 			}
 			else
@@ -136,11 +142,11 @@ public class Player : MonoBehaviour
 				if (!_canAttack)
 					return;
 				_canAttack = false;
-
+				PlaySound(_stabSound);
 				_myAnimator.SetBool("IsAttacking", true);
 				StartCoroutine(ToggleCanAttack());
+			}
 		}
-	}
 		private void OnTogglePauseMenu(InputAction.CallbackContext Context)
 		{
 			if (_pauseMenuContainer)
@@ -185,7 +191,8 @@ public class Player : MonoBehaviour
 		OnPlayerTakeDamageDelegate.Invoke(_isSecondaryPlayer);
 		if(--_health <= 0)
 		{
-			SceneManager.LoadScene(0);
+			MatchManager.OnPlayerWin(!_isSecondaryPlayer);
+			Destroy(gameObject);
 		}
 	}
 	public void TriggerPlayerDamageReaction(Vector2 Direction)
@@ -253,6 +260,17 @@ public class Player : MonoBehaviour
 	}
 	#endregion
 
+	#region Audio
+		private void PlaySound(AudioMap Map)
+		{
+			if (!_myAudioComponent || !Map.SoundToPlay)
+				return;
+			_myAudioComponent.clip = Map.SoundToPlay;
+			_myAudioComponent.volume = Map.Volume;
+			_myAudioComponent.Play();
+		}
+	#endregion
+
 	#region Unity Interface
 	private void Awake()
 	{
@@ -265,19 +283,22 @@ public class Player : MonoBehaviour
         _rB = GetComponent<Rigidbody2D>();
 		_myCollider = GetComponent<CapsuleCollider2D>();
 		_myAnimator = GetComponent<Animator>();
+		_myAudioComponent = GetComponent<AudioSource>();
     }
     private void Update()
     {
         ProcessInput();
 
 		if (transform.position.y < _killY)
-			SceneManager.LoadScene(0);
+			DamagePlayer();
 
 		if(_myAnimator)
 		{
 			_myAnimator.SetBool("IsWalking", (Mathf.Abs(_rB.velocity.x) > 0.01));
 		}
-    }
+
+		_canJump = Mathf.Abs(_rB.velocity.y) < 0.0001f;
+	}
     private void FixedUpdate()
     {
         MovePlayer();
