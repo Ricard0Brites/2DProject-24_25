@@ -143,7 +143,8 @@ public class Player : MonoBehaviour
 					return;
 				_canAttack = false;
 				PlaySound(_stabSound);
-				_myAnimator.SetBool("IsAttacking", true);
+				if(_myAnimator)
+					_myAnimator.SetBool("IsAttacking", true);
 				StartCoroutine(ToggleCanAttack());
 			}
 		}

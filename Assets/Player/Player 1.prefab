@@ -89,15 +89,15 @@ MonoBehaviour:
   _health: 5
   _damageForce: 800
   _isSecondaryPlayer: 0
-  _attackRange: 0.5
-  _attackCooldown: 0.2
+  _attackRange: 0.8
+  _attackCooldown: 0.5
   _pauseMenuContainer: {fileID: 0}
   _killY: -20
   _throwablePrefab: {fileID: 8558567906748005193, guid: 3742426da884d7d49908fb1f00c815c5, type: 3}
   _throwablesSpawnLocation: {fileID: 1621241582574402118}
   _stabSound:
     SoundToPlay: {fileID: 8300000, guid: 553374b2dfb4a4a4d9aac7e23d99acd1, type: 3}
-    Volume: 1
+    Volume: 0.75
   _throwSound:
     SoundToPlay: {fileID: 8300000, guid: 9d4dda3fc05de5747b2fb98937405043, type: 3}
     Volume: 0.1

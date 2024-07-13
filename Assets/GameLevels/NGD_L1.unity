@@ -1280,10 +1280,6 @@ PrefabInstance:
       value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
-      propertyPath: _stabSound.Volume
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2099073700948214055, guid: 04b660c6a8489b440a629bf5619b29c2, type: 3}
       propertyPath: _pauseMenuContainer
       value: 
       objectReference: {fileID: 1208161015}
