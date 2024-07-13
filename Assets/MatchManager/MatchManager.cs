@@ -23,5 +23,5 @@ public class MatchManager : MonoBehaviour
 
 		if (ScoreText)
 			ScoreText.text = SK.PlayerOneVictoryCount.ToString() + " - " + SK.PlayerTwoVictoryCount.ToString();
-		}
+	}
 }
